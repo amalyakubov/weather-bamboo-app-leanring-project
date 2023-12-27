@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = "style-loader";
 
 const config = {
-  entry: path.resolve(__dirname, "/index.js"),
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -19,7 +19,8 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "src/index.html",
+      filename: "index.html",
     }),
 
     // Add your plugins here
@@ -48,6 +49,10 @@ const config = {
             presets: ["@babel/preset-env"],
           },
         },
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
       },
 
       // Add your rules for custom modules here
