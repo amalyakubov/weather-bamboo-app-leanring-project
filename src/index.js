@@ -4,3 +4,5 @@ function Double(x) {
 
 console.log(Double(4));
 import "./style.css";
+
+import cloudIcon from "../assets/clouds.svg";
