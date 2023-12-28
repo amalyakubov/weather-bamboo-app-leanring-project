@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("window.onload = function (event) {\n  console.logo(alert(Double(9)));\n};\nfunction Double(x) {\n  return x * 2;\n}\n\n//# sourceURL=webpack://weather-app-bamboo/./src/index.js?");
+eval("function Double(x) {\n  return x * 2;\n}\nconsole.log(Double(4));\n\n//# sourceURL=webpack://weather-app-bamboo/./src/index.js?");
 
 /***/ })
 
