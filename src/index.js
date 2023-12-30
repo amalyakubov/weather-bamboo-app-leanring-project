@@ -1,4 +1,8 @@
 import cloudIcon from "../assets/clouds.svg";
+import moonIcon from "../assets/moon.svg";
+import precipitationIcon from "../assets/precipitation.svg";
+import sunIcon from "../assets/sun.svg";
+import windIcon from "../assets/wind.svg";
 
 const LOCATIONTEXTFIELD = document.getElementById("location-input");
 
