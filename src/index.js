@@ -3,6 +3,7 @@ import moonIcon from "../assets/moon.svg";
 import precipitationIcon from "../assets/precipitation.svg";
 import sunIcon from "../assets/sun.svg";
 import windIcon from "../assets/wind.svg";
+import "./style.css";
 
 const LOCATIONTEXTFIELD = document.getElementById("location-input");
 
