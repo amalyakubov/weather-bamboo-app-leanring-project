@@ -197,6 +197,17 @@ async function createCurrentWeatherDataObject(weatherData) {
   return CURRENT_WEATHER_DATA_OBJECT;
 }
 
+const BUTTON = document.getElementById("switch-degree-measurement-button");
+BUTTON.addEventListener("click", (event) => {
+  if (BUTTON.classList.contains("fahrenheit")) {
+    BUTTON.textContent = `Switch to (C\u00B0)`;
+    BUTTON.classList.remove("fahrenheit");
+  } else {
+    BUTTON.textContent = `Switch to (F\u00B0)`;
+    BUTTON.classList.add("fahrenheit");
+  }
+});
+
 getTimeInTwelveHourFormat();
 
 getCurrentWeather("Warsaw").then((result) => {

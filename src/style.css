@@ -139,11 +139,19 @@ body {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 footer {
   width: 100vw;
+  flex: 0 0 auto;
+}
+
+div.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  flex: 1 0 auto;
 }
 
 h2,
@@ -255,8 +263,8 @@ p {
 button#switch-degree-measurement-button {
   display: flex;
   align-items: center;
-  color: white;
-  background-color: #1f1f1f;
+  color: black;
+  background-color: rgb(245, 245, 245);
   font-size: 20px;
   letter-spacing: 2px;
   border: none;
@@ -319,6 +327,7 @@ ul.day-weather-info-list li.weather-value {
 }
 
 footer {
+  height: 100%;
   background-color: #0b0000;
   font-size: 20px;
   padding: 50px;
@@ -343,8 +352,8 @@ p#my-ref {
 }
 
 div.footer-main-container {
-  padding-top: 150px;
   display: flex;
+  align-items: center;
 }
 
 footer ol {
@@ -361,4 +370,9 @@ img#github-icon {
 a {
   color: white;
   text-decoration: none;
+}
+
+button#switch-degree-measurement-button.fahrenheit {
+  color: white;
+  background-color: #1f1f1f;
 }
