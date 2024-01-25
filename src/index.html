@@ -21,9 +21,9 @@
       </div>
       <div class="location-temp-container">
         <input type="text" id="location-input" />
-        <div id="switch-degree-measurement-button" aria-label="button">
-          Switch Temperature
-        </div>
+        <button id="switch-degree-measurement-button">
+          Switch to (F&#xb0;)
+        </button>
       </div>
       <table id="weather-overview-table">
         <tbody>
@@ -74,85 +74,109 @@
         </table>
       </div>
       <div id="cards">
-        <div class="card-conatiner">
-          <h3>Wednesday 14th / Change later</h3>
-          <div id="day-weather-data-card">
-            <div id="weather-header-data">
-              <p>24*C</p>
-              <p>The icon is here</p>
-            </div>
-            <ul id="day-weather-info-list">
-              <li class="day-card-weather-info-container">
-                <p>Moon_Icon</p>
-                <p>13*C</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>Wind Icon</p>
-                <p>14km/h</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>Percepitation Icon</p>
-                <p>48%</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>UV Icon here</p>
-                <p>UV</p>
-                <p>3</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-conatiner">
-          <h3>Wednesday 15th / Change later</h3>
-          <div id="day-weather-data-card">
-            <div id="weather-header-data">
-              <p>24*C</p>
-              <p>The icon is here</p>
-            </div>
-            <ul id="day-weather-info-list">
-              <li class="day-card-weather-info-container">
-                <p>Moon_Icon</p>
-                <p>13*C</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>Wind Icon</p>
-                <p>14km/h</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>Percepitation Icon</p>
-                <p>48%</p>
-              </li>
-              <li class="day-card-weather-info-container">
-                <p>UV Icon here</p>
-                <p>UV</p>
-                <p>3</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-conatiner">
+        <div class="card-container">
           <h3>Wednesday 14th / Change later</h3>
           <div class="day-weather-data-card">
-            <div id="weather-header-data">
-              <p>Moon_Icon</p>
-              <p>13*C</p>
+            <div class="weather-card-header">
+              <p>24*C</p>
+              <p>The icon is here</p>
             </div>
-            <ul id="day-weather-info-list">
-              <li class="day-card-weather-info-container">
+            <ul class="day-weather-info-list">
+              <li class="day-card-weather-info-container weather-data">
                 <p>Moon_Icon</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
                 <p>13*C</p>
               </li>
-              <li class="day-card-weather-info-container">
+              <li class="day-card-weather-info-container weather-data">
                 <p>Wind Icon</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
                 <p>14km/h</p>
               </li>
-              <li class="day-card-weather-info-container">
+              <li class="day-card-weather-info-container weather-data">
                 <p>Percepitation Icon</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
                 <p>48%</p>
               </li>
-              <li class="day-card-weather-info-container">
+              <li class="day-card-weather-info-container weather-data">
                 <p>UV Icon here</p>
                 <p>UV</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
+                <p>3</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-container">
+          <h3>Wednesday 15th / Change later</h3>
+          <div class="day-weather-data-card">
+            <div class="weather-card-header">
+              <p>24*C</p>
+              <p>The icon is here</p>
+            </div>
+            <ul class="day-weather-info-list">
+              <li class="day-card-weather-info-container weather-data">
+                <p>Moon_Icon</p>
+              </li>
+              <li class="day-card-weather-info weather-value">
+                <p>13*C</p>
+              </li>
+              <li class="day-card-weather-info weather-data">
+                <p>Wind Icon</p>
+              </li>
+              <li class="day-card-weather-info weather-value">
+                <p>14km/h</p>
+              </li>
+              <li class="day-card-weather-info-container weather-data">
+                <p>Percepitation Icon</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
+                <p>48%</p>
+              </li>
+              <li class="day-card-weather-info-container weather-data">
+                <p>UV Icon here</p>
+                <p>UV</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
+                <p>3</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-container">
+          <h3>Wednesday 14th / Change later</h3>
+          <div class="day-weather-data-card">
+            <div class="weather-card-header">
+              <p>21*C</p>
+              <p>The icon is Here</p>
+            </div>
+            <ul class="day-weather-info-list">
+              <li class="day-card-weather-info-container weather-data">
+                <p>Moon_Icon</p>
+              </li>
+              <li class="day-card-weather-info weather-value">
+                <p>13*C</p>
+              </li>
+              <li class="day-card-weather-info weather-data">
+                <p>Wind Icon</p>
+              </li>
+              <li class="day-card-weather-info weather-value">
+                <p>14km/h</p>
+              </li>
+              <li class="day-card-weather-info-container weather-data">
+                <p>Percepitation Icon</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
+                <p>48%</p>
+              </li>
+              <li class="day-card-weather-info-container weather-data">
+                <p>UV Icon here</p>
+                <p>UV</p>
+              </li>
+              <li class="day-card-weather-info-container weather-value">
                 <p>3</p>
               </li>
             </ul>
@@ -161,57 +185,66 @@
       </div>
     </div>
     <footer>
-      <ol>
-        <li>
-          clouds by Atif Arshad from
-          <a
-            href="https://thenounproject.com/browse/icons/term/clouds/"
-            target="_blank"
-            title="clouds Icons"
-            >Noun Project</a
-          >
-          (CC BY 3.0)
-        </li>
-        <li>
-          <a
-            href="https://thenounproject.com/browse/icons/term/sun/"
-            target="_blank"
-            title="sun Icons"
-            >Noun Project</a
-          >
-          (CC BY 3.0)
-        </li>
-        <li>
-          Moon by creative_visionary from
-          <a
-            href="https://thenounproject.com/browse/icons/term/moon/"
-            target="_blank"
-            title="Moon Icons"
-            >Noun Project</a
-          >
-          (CC BY 3.0)
-        </li>
-        <li>
-          Wind by Adrien Coquet from
-          <a
-            href="https://thenounproject.com/browse/icons/term/wind/"
-            target="_blank"
-            title="Wind Icons"
-            >Noun Project</a
-          >
-          (CC BY 3.0)
-        </li>
-        <li>
-          precipitation by Angelo Troiano from
-          <a
-            href="https://thenounproject.com/browse/icons/term/precipitation/"
-            target="_blank"
-            title="precipitation Icons"
-            >Noun Project</a
-          >
-          (CC BY 3.0)
-        </li>
-      </ol>
+      <div class="footer-main-container">
+        <ol>
+          <li>
+            clouds by Atif Arshad from
+            <a
+              href="https://thenounproject.com/browse/icons/term/clouds/"
+              target="_blank"
+              title="clouds Icons"
+              >Noun Project</a
+            >
+            (CC BY 3.0)
+          </li>
+          <li>
+            <a
+              href="https://thenounproject.com/browse/icons/term/sun/"
+              target="_blank"
+              title="sun Icons"
+              >Noun Project</a
+            >
+            (CC BY 3.0)
+          </li>
+          <li>
+            Moon by creative_visionary from
+            <a
+              href="https://thenounproject.com/browse/icons/term/moon/"
+              target="_blank"
+              title="Moon Icons"
+              >Noun Project</a
+            >
+            (CC BY 3.0)
+          </li>
+          <li>
+            Wind by Adrien Coquet from
+            <a
+              href="https://thenounproject.com/browse/icons/term/wind/"
+              target="_blank"
+              title="Wind Icons"
+              >Noun Project</a
+            >
+            (CC BY 3.0)
+          </li>
+          <li>
+            precipitation by Angelo Troiano from
+            <a
+              href="https://thenounproject.com/browse/icons/term/precipitation/"
+              target="_blank"
+              title="precipitation Icons"
+              >Noun Project</a
+            >
+            (CC BY 3.0)
+          </li>
+        </ol>
+      </div>
+      <div id="hr"></div>
+      <p id="my-ref">
+        <a href="https://github.com/amalyakubov">Created by Amal Yakubov </a>
+        <a href="https://github.com/amalyakubov"
+          ><img src="../assets/github-mark-white.svg" alt="" id="github-icon"
+        /></a>
+      </p>
     </footer>
   </body>
 </html>
