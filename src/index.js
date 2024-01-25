@@ -59,11 +59,12 @@ async function getCurrentWeather(location) {
 }
 
 function createDayArray(nextSixHoursArray) {
+  let result = [];
   if (nextSixHoursArray.includes(1) === false) {
-    return 0;
+    result = [0, 0, 0, 0, 0, 0, 0];
+    return result;
   } else {
     let index;
-    let result = [];
     for (let i = 0; i <= nextSixHoursArray.length; i++) {
       if (nextSixHoursArray[i] === 23 && nextSixHoursArray[i + 1] === 0) {
         index = i;
