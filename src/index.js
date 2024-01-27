@@ -4,6 +4,7 @@ import precipitationIcon from "../assets/precipitation.svg";
 import sunIcon from "../assets/sun.svg";
 import windIcon from "../assets/wind.svg";
 import githubLogo from "../assets/github-mark-white.svg";
+import gradient from "../assets/mesh-gradient.png";
 import "./style.css";
 
 const LOCATIONTEXTFIELD = document.getElementById("location-input");
