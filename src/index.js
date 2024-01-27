@@ -36,6 +36,8 @@ function mapHoursToArray(hours) {
   return array;
 }
 
+let tempUnits = "celsius";
+
 function getTimeInTwelveHourFormat() {
   const CURRENT_DATE = new Date();
   const RESULT = CURRENT_DATE.toLocaleString("en-US", {
@@ -84,8 +86,9 @@ function createDayArray(nextSixHoursArray) {
   }
 }
 
-function refreshPage(weatherData) {
+function getNextSixHoursInDisplayForm() {
   let nextSixHoursArray24format = mapHoursToArray(getHours());
+
   let nextSixHoursArray = nextSixHoursArray24format.map((element) => {
     if (element === 0) {
       return `0:00`;
@@ -93,21 +96,13 @@ function refreshPage(weatherData) {
       return `${element}:00`;
     }
   });
-  const FIRST_HOUR = document.getElementById("1st-hour");
-  const SECOND_HOUR = document.getElementById("2nd-hour");
-  const THIRD_HOUR = document.getElementById("3rd-hour");
-  const FOURTH_HOUR = document.getElementById("4th-hour");
-  const FIFTH_HOUR = document.getElementById("5th-hour");
-
-  FIRST_HOUR.textContent = nextSixHoursArray[0];
-  SECOND_HOUR.textContent = nextSixHoursArray[1];
-  THIRD_HOUR.textContent = nextSixHoursArray[2];
-  FOURTH_HOUR.textContent = nextSixHoursArray[3];
-  FIFTH_HOUR.textContent = nextSixHoursArray[4];
+  return nextSixHoursArray;
 }
 
 async function createCurrentWeatherDataObject(weatherData) {
   let nextSixHoursArray = mapHoursToArray(getHours());
+  console.log("nextsixhours array:");
+  console.log(nextSixHoursArray);
   let day = createDayArray(nextSixHoursArray);
 
   const CURRENT_WEATHER_DATA_OBJECT = {
@@ -211,6 +206,69 @@ async function createCurrentWeatherDataObject(weatherData) {
   return CURRENT_WEATHER_DATA_OBJECT;
 }
 
+function getTodayTempObject(weatherData) {
+  let nextSixHours = mapHoursToArray(getHours());
+
+  let resultObject = {
+    celsius: [
+      weatherData["nextsixhours"][`${nextSixHours[0]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[1]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[2]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[3]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[4]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[5]}_tempC`],
+    ],
+    fahrenheit: [
+      weatherData["nextsixhours"][`${nextSixHours[0]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[1]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[2]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[3]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[4]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[5]}_tempF`],
+    ],
+  };
+  return resultObject;
+}
+
+function refreshPage(weatherData) {
+  const nextSixHoursArray = getNextSixHoursInDisplayForm();
+  let tempeartureObject = getTodayTempObject(weatherData);
+
+  let tempUnitsymbol = tempUnits === "celsius" ? "C" : "F";
+
+  const FIRST_HOUR = document.getElementById("1st-hour");
+  const SECOND_HOUR = document.getElementById("2nd-hour");
+  const THIRD_HOUR = document.getElementById("3rd-hour");
+  const FOURTH_HOUR = document.getElementById("4th-hour");
+  const FIFTH_HOUR = document.getElementById("5th-hour");
+
+  FIRST_HOUR.textContent = nextSixHoursArray[0];
+  SECOND_HOUR.textContent = nextSixHoursArray[1];
+  THIRD_HOUR.textContent = nextSixHoursArray[2];
+  FOURTH_HOUR.textContent = nextSixHoursArray[3];
+  FIFTH_HOUR.textContent = nextSixHoursArray[4];
+
+  const FIRST_HOUR_TEMP = document.getElementById("1st-hour-temp");
+  const SECOND_HOUR_TEMP = document.getElementById("2nd-hour-temp");
+  const THIRD_HOUR_TEMP = document.getElementById("3rd-hour-temp");
+  const FOURTH_HOUR_TEMP = document.getElementById("4th-hour-temp");
+  const FIFTH_HOUR_TEMP = document.getElementById("5th-hour-temp");
+
+  [
+    FIRST_HOUR_TEMP.textContent,
+    SECOND_HOUR_TEMP.textContent,
+    THIRD_HOUR_TEMP.textContent,
+    FOURTH_HOUR_TEMP.textContent,
+    FIFTH_HOUR_TEMP.textContent,
+  ] = [
+    `${tempeartureObject[tempUnits][0]}\xB0${tempUnitsymbol}`,
+    `${tempeartureObject[tempUnits][1]}\xB0${tempUnitsymbol}`,
+    `${tempeartureObject[tempUnits][2]}\xB0${tempUnitsymbol}`,
+    `${tempeartureObject[tempUnits][3]}\xB0${tempUnitsymbol}`,
+    `${tempeartureObject[tempUnits][4]}\xB0${tempUnitsymbol}`,
+  ];
+}
+
 const BUTTON = document.getElementById("switch-degree-measurement-button");
 BUTTON.addEventListener("click", (event) => {
   if (BUTTON.classList.contains("fahrenheit")) {
@@ -225,7 +283,8 @@ BUTTON.addEventListener("click", (event) => {
 getTimeInTwelveHourFormat();
 
 getCurrentWeather("Warsaw").then((result) => {
-  createCurrentWeatherDataObject(result);
+  (async () => {
+    let weatherData = await createCurrentWeatherDataObject(result);
+    refreshPage(await weatherData);
+  })();
 });
-
-refreshPage();
