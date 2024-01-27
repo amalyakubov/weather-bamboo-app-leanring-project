@@ -84,14 +84,27 @@ function createDayArray(nextSixHoursArray) {
   }
 }
 
-/*
-  get the index of the first vlaue that crosses 24 and rests to 1
-  if hour is less than or equal to 24 before the hour goes down to 1 {
-    push 0 to the array
-  } else {
-    push 1 to the array
-  }
-*/
+function refreshPage(weatherData) {
+  let nextSixHoursArray24format = mapHoursToArray(getHours());
+  let nextSixHoursArray = nextSixHoursArray24format.map((element) => {
+    if (element === 0) {
+      return `0:00`;
+    } else {
+      return `${element}:00`;
+    }
+  });
+  const FIRST_HOUR = document.getElementById("1st-hour");
+  const SECOND_HOUR = document.getElementById("2nd-hour");
+  const THIRD_HOUR = document.getElementById("3rd-hour");
+  const FOURTH_HOUR = document.getElementById("4th-hour");
+  const FIFTH_HOUR = document.getElementById("5th-hour");
+
+  FIRST_HOUR.textContent = nextSixHoursArray[0];
+  SECOND_HOUR.textContent = nextSixHoursArray[1];
+  THIRD_HOUR.textContent = nextSixHoursArray[2];
+  FOURTH_HOUR.textContent = nextSixHoursArray[3];
+  FIFTH_HOUR.textContent = nextSixHoursArray[4];
+}
 
 async function createCurrentWeatherDataObject(weatherData) {
   let nextSixHoursArray = mapHoursToArray(getHours());
@@ -214,3 +227,5 @@ getTimeInTwelveHourFormat();
 getCurrentWeather("Warsaw").then((result) => {
   createCurrentWeatherDataObject(result);
 });
+
+refreshPage();
