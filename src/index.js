@@ -109,10 +109,14 @@ async function createCurrentWeatherDataObject(weatherData) {
     currentWeather: {
       temperatureC: weatherData["current"]["temp_c"],
       temperatureF: weatherData["current"]["temp_f"],
-      windspeeed: weatherData["current"]["wind_kph"],
-      nightTemperature:
+      windspeedKMH: weatherData["current"]["wind_kph"],
+      windspeedMPH: weatherData["current"]["wind_mph"],
+      nightTemperatureC:
         weatherData["forecast"]["forecastday"]["0"]["day"]["mintemp_c"],
+      nightTemperatureF:
+        weatherData["forecast"]["forecastday"]["0"]["day"]["mintemp_f"],
       precipitation: weatherData["current"]["precip_mm"],
+      UV: weatherData["current"]["uv"],
     },
     nextsixhours: {
       [`${nextSixHoursArray[0]}_tempC`]:
@@ -266,6 +270,37 @@ function refreshPage(weatherData) {
     `${tempeartureObject[tempUnits][2]}\xB0${tempUnitsymbol}`,
     `${tempeartureObject[tempUnits][3]}\xB0${tempUnitsymbol}`,
     `${tempeartureObject[tempUnits][4]}\xB0${tempUnitsymbol}`,
+  ];
+
+  const [DAY_TEMP, NIGHT_TEMP, PERCEPITATION_TODAY, WIND_TODAY, UVINDEX_TODAY] =
+    [
+      document.getElementById("today-day-temp"),
+      document.getElementById("today-night-temp"),
+      document.getElementById("today-percepitation"),
+      document.getElementById("today-wind"),
+      document.getElementById("today-uv"),
+    ];
+
+  if (tempUnits === "celsius") {
+    [DAY_TEMP.textContent, NIGHT_TEMP.textContent] = [
+      `${weatherData["currentWeather"]["temperatureC"]}\xB0`,
+      `${weatherData["currentWeather"]["nightTemperatureC"]}\xB0`,
+    ];
+  } else {
+    [DAY_TEMP.textContent, NIGHT_TEMP.textContent] = [
+      `${weatherData["currentWeather"]["temperatureF"]}\xB0`,
+      `${weatherData["currentWeather"]["nightTemperatureF"]}\xB0`,
+    ];
+  }
+
+  [
+    PERCEPITATION_TODAY.textContent,
+    WIND_TODAY.textContent,
+    UVINDEX_TODAY.textContent,
+  ] = [
+    `${weatherData["currentWeather"]["precipitation"]}mm`,
+    `${weatherData["currentWeather"]["windspeedKMH"]}km/h`,
+    weatherData["currentWeather"]["UV"],
   ];
 }
 
