@@ -99,6 +99,69 @@ function getNextSixHoursInDisplayForm() {
   return nextSixHoursArray;
 }
 
+function addSufixToDayNumber(dayOfTheMonth) {
+  let lastNumber = dayOfTheMonth % 10;
+
+  switch (lastNumber) {
+    case 1:
+      return `${dayOfTheMonth}st`;
+    case 2:
+      return `${dayOfTheMonth}nd`;
+    case 3:
+      return `${dayOfTheMonth}rd`;
+    case 4:
+      return `${dayOfTheMonth}th`;
+    case 5:
+      return `${dayOfTheMonth}th`;
+    case 6:
+      return `${dayOfTheMonth}th`;
+    case 7:
+      return `${dayOfTheMonth}th`;
+    case 8:
+      return `${dayOfTheMonth}th`;
+    case 9:
+      return `${dayOfTheMonth}th`;
+    case 0:
+      return `${dayOfTheMonth}th`;
+  }
+}
+
+function getNextThreeDays() {
+  let tomorrrow = new Date();
+  tomorrrow.setDate(tomorrrow.getDate() + 1);
+  let oneDayAfterTomorrow = new Date();
+  oneDayAfterTomorrow.setDate(tomorrrow.getDate() + 1);
+  let TwoDaysAfterTomorrow = new Date();
+  TwoDaysAfterTomorrow.setDate(tomorrrow.getDate() + 2);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let [
+    tomorrrowAsWrittenDay,
+    oneDayAfterTomorrowAsWrittenDay,
+    TwoDaysAfterTomorrowAsWrittenDay,
+  ] = [
+    addSufixToDayNumber(tomorrrow.getDay()),
+    addSufixToDayNumber(oneDayAfterTomorrow.getDay()),
+    addSufixToDayNumber(TwoDaysAfterTomorrow.getDay()),
+  ];
+
+  let daysObject = {
+    0: [days[tomorrrow.getDay()], tomorrrowAsWrittenDay],
+    1: [days[oneDayAfterTomorrow.getDay()], oneDayAfterTomorrowAsWrittenDay],
+    2: [days[TwoDaysAfterTomorrow.getDay()], TwoDaysAfterTomorrowAsWrittenDay],
+  };
+  return daysObject;
+}
+
 async function createCurrentWeatherDataObject(weatherData) {
   let nextSixHoursArray = mapHoursToArray(getHours());
   console.log("nextsixhours array:");
@@ -237,6 +300,7 @@ function getTodayTempObject(weatherData) {
 function refreshPage(weatherData) {
   const nextSixHoursArray = getNextSixHoursInDisplayForm();
   let tempeartureObject = getTodayTempObject(weatherData);
+  let arrayObjectOfNextThreeDaysObj = getNextThreeDays();
 
   let tempUnitsymbol = tempUnits === "celsius" ? "C" : "F";
 
@@ -302,6 +366,22 @@ function refreshPage(weatherData) {
     `${weatherData["currentWeather"]["windspeedKMH"]}km/h`,
     weatherData["currentWeather"]["UV"],
   ];
+
+  const [FIRSTDAY_HEADING, SECOND_DAY_HEADING, THIRD_DAY_HEADING] = [
+    document.getElementById("1st-day"),
+    document.getElementById("2nd-day"),
+    document.getElementById("3rd-day"),
+  ];
+
+  [
+    FIRSTDAY_HEADING.textContent,
+    SECOND_DAY_HEADING.textContent,
+    THIRD_DAY_HEADING.textContent,
+  ] = [
+    `${arrayObjectOfNextThreeDaysObj[0][0]}, ${arrayObjectOfNextThreeDaysObj[0][1]}`,
+    `${arrayObjectOfNextThreeDaysObj[1][0]}, ${arrayObjectOfNextThreeDaysObj[1][1]}`,
+    `${arrayObjectOfNextThreeDaysObj[2][0]}, ${arrayObjectOfNextThreeDaysObj[2][1]}`,
+  ];
 }
 
 const BUTTON = document.getElementById("switch-degree-measurement-button");
@@ -323,3 +403,5 @@ getCurrentWeather("Warsaw").then((result) => {
     refreshPage(await weatherData);
   })();
 });
+
+console.log(getNextThreeDays());
