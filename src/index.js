@@ -149,9 +149,9 @@ function getNextThreeDays() {
     oneDayAfterTomorrowAsWrittenDay,
     TwoDaysAfterTomorrowAsWrittenDay,
   ] = [
-    addSufixToDayNumber(tomorrrow.getDay()),
-    addSufixToDayNumber(oneDayAfterTomorrow.getDay()),
-    addSufixToDayNumber(TwoDaysAfterTomorrow.getDay()),
+    addSufixToDayNumber(tomorrrow.getDate()),
+    addSufixToDayNumber(oneDayAfterTomorrow.getDate()),
+    addSufixToDayNumber(TwoDaysAfterTomorrow.getDate()),
   ];
 
   let daysObject = {
@@ -159,6 +159,8 @@ function getNextThreeDays() {
     1: [days[oneDayAfterTomorrow.getDay()], oneDayAfterTomorrowAsWrittenDay],
     2: [days[TwoDaysAfterTomorrow.getDay()], TwoDaysAfterTomorrowAsWrittenDay],
   };
+  console.log("tomorrowAsANumber:");
+  console.log(tomorrrow.getDay());
   return daysObject;
 }
 
@@ -248,7 +250,9 @@ async function createCurrentWeatherDataObject(weatherData) {
           weatherData["forecast"]["forecastday"][1]["day"]["mintemp_c"],
         nighttemp_f:
           weatherData["forecast"]["forecastday"][1]["day"]["mintemp_f"],
-        maximumWindSpeed:
+        maximumWindSpeedKPH:
+          weatherData["forecast"]["forecastday"][1]["day"]["maxwind_kph"],
+        maximumWindSpeedMPH:
           weatherData["forecast"]["forecastday"][1]["day"]["maxwind_kph"],
         precipitationInMm:
           weatherData["forecast"]["forecastday"][1]["day"]["totalprecip_mm"],
@@ -261,8 +265,10 @@ async function createCurrentWeatherDataObject(weatherData) {
           weatherData["forecast"]["forecastday"][2]["day"]["mintemp_c"],
         nighttemp_f:
           weatherData["forecast"]["forecastday"][2]["day"]["mintemp_f"],
-        maximumWindSpeed:
+        maximumWindSpeedKMH:
           weatherData["forecast"]["forecastday"][2]["day"]["maxwind_kph"],
+        maximumWindSpeedMPH:
+          weatherData["forecast"]["forecastday"][2]["day"]["maxwind_mph"],
         precipitationInMm:
           weatherData["forecast"]["forecastday"][2]["day"]["totalprecip_mm"],
         UVIndex: weatherData["forecast"]["forecastday"][2]["day"]["uv"],
@@ -295,6 +301,80 @@ function getTodayTempObject(weatherData) {
     ],
   };
   return resultObject;
+}
+
+function refreshWeatherCards(weatherData) {
+  console.log("weatherData");
+  console.log(weatherData);
+  const [
+    FIRST_DAY_TEMP,
+    FIRST_DAY_NIGHT_TEMP,
+    FIRST_DAY_WIND,
+    FIRST_DAY_PRECIPITATION,
+    FIRST_DAY_UV,
+    SECOND_DAY_TEMP,
+    SECOND_DAY_NIGHT_TEMP,
+    SECOND_DAY_WIND,
+    SECOND_DAY_PRECIPITATION,
+    SECOND_DAY_UV,
+    THIRD_DAY_TEMP,
+    THIRD_DAY_NIGHT_TEMP,
+    THIRD_DAY_WIND,
+    THIRD_DAY_PRECIPITATION,
+    THIDR_DAY_UV,
+  ] = [
+    document.getElementById("1st-day-temp"),
+    document.getElementById("1st-day-night-temp"),
+    document.getElementById("1st-day-wind"),
+    document.getElementById("1st-day-precipitation"),
+    document.getElementById("1st-day-uv"),
+    document.getElementById("2nd-day-temp"),
+    document.getElementById("2nd-day-night-temp"),
+    document.getElementById("2nd-day-wind"),
+    document.getElementById("2nd-day-precipitation"),
+    document.getElementById("2nd-day-uv"),
+    document.getElementById("3rd-day-temp"),
+    document.getElementById("3rd-day-night-temp"),
+    document.getElementById("3rd-day-wind"),
+    document.getElementById("3rd-day-precipitation"),
+    document.getElementById("3rd-day-uv"),
+  ];
+
+  if (tempUnits === "celsius") {
+    [
+      FIRST_DAY_TEMP.textContent,
+      FIRST_DAY_NIGHT_TEMP.textContent,
+      FIRST_DAY_WIND.textContent,
+      FIRST_DAY_PRECIPITATION.textContent,
+      FIRST_DAY_UV.textContent,
+      SECOND_DAY_TEMP.textContent,
+      SECOND_DAY_NIGHT_TEMP.textContent,
+      SECOND_DAY_WIND.textContent,
+      SECOND_DAY_PRECIPITATION.textContent,
+      SECOND_DAY_UV.textContent,
+      THIRD_DAY_TEMP.textContent,
+      THIRD_DAY_NIGHT_TEMP.textContent,
+      THIRD_DAY_WIND.textContent,
+      THIRD_DAY_PRECIPITATION.textContent,
+      THIDR_DAY_UV.textContent,
+    ] = [
+      `${weatherData["currentWeather"]["temperatureC"]}\xB0C`,
+      `${weatherData["currentWeather"]["nightTemperatureC"]}\xB0C`,
+      `${weatherData["currentWeather"]["windspeedKMH"]} km/h`,
+      `${weatherData["currentWeather"]["precipitation"]} mm`,
+      weatherData["currentWeather"]["UV"],
+      `${weatherData["nextThreeDays"][1]["temp_c"]}\xB0C`,
+      `${weatherData["nextThreeDays"][1]["nighttemp_c"]}\xB0C`,
+      `${weatherData["nextThreeDays"][1]["maximumWindSpeedKPH"]} km/h`,
+      `${weatherData["nextThreeDays"][1]["precipitationInMm"]} mm`,
+      weatherData["nextThreeDays"][1]["UVIndex"],
+      `${weatherData["nextThreeDays"][2]["temp_c"]}\xB0C`,
+      `${weatherData["nextThreeDays"][2]["nighttemp_c"]}\xB0C`,
+      `${weatherData["nextThreeDays"][2]["maximumWindSpeedKMH"]} km/h`,
+      `${weatherData["nextThreeDays"][2]["precipitationInMm"]} mm`,
+      weatherData["nextThreeDays"][2]["UVIndex"],
+    ];
+  }
 }
 
 function refreshPage(weatherData) {
@@ -340,7 +420,7 @@ function refreshPage(weatherData) {
     [
       document.getElementById("today-day-temp"),
       document.getElementById("today-night-temp"),
-      document.getElementById("today-percepitation"),
+      document.getElementById("today-precipitation"),
       document.getElementById("today-wind"),
       document.getElementById("today-uv"),
     ];
@@ -382,6 +462,8 @@ function refreshPage(weatherData) {
     `${arrayObjectOfNextThreeDaysObj[1][0]}, ${arrayObjectOfNextThreeDaysObj[1][1]}`,
     `${arrayObjectOfNextThreeDaysObj[2][0]}, ${arrayObjectOfNextThreeDaysObj[2][1]}`,
   ];
+
+  refreshWeatherCards(weatherData);
 }
 
 const BUTTON = document.getElementById("switch-degree-measurement-button");
