@@ -5,32 +5,41 @@ import sunIcon from "../assets/sun.svg";
 import windIcon from "../assets/wind.svg";
 import githubLogo from "../assets/github-mark-white.svg";
 import gradient from "../assets/mesh-gradient.png";
+import { add } from "date-fns";
 import "./style.css";
 
-const LOCATIONTEXTFIELD = document.getElementById("location-input");
-
-const KEY = "ffd39e8293c94f3c8fe195415232612";
-LOCATIONTEXTFIELD.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-  }
-});
-
 function getHours() {
-  const CURRENT_DATE = new Date();
-  const HOURS = CURRENT_DATE.getHours();
-  console.log(HOURS);
+  const LOCAL_TIME = new Date(Date.parse(locationCurrentTime));
+  const HOURS = LOCAL_TIME.getHours();
+  console.log("currentLocationTime");
+  console.log(locationCurrentTime);
   return HOURS;
 }
 
+let locationCurrentTime;
+
 function mapHoursToArray(hours) {
   let array = [];
+  let lastPushedTime;
   for (let i = hours + 1; i <= hours + 7; i++) {
-    if (i < 24) {
-      array.push(i);
-    } else if (i >= 24) {
-      array.push(i - 24);
+    if (lastPushedTime === undefined) {
+      let nextHour = add(locationCurrentTime, {
+        hours: 1,
+      });
+      array.push(nextHour);
+      lastPushedTime = nextHour;
+    } else {
+      let nextHour = add(lastPushedTime, {
+        hours: 1,
+      });
+      array.push(nextHour);
+      lastPushedTime = nextHour;
     }
-    // array.push(i);
+    // if (i < 24) {
+    //   array.push(i);
+    // } else if (i >= 24) {
+    //   array.push(i - 24);
+    // }
   }
   console.log(array);
   return array;
@@ -62,16 +71,37 @@ async function getCurrentWeather(location) {
   }
 }
 
+const LOCATIONTEXTFIELD = document.getElementById("location-input");
+
+const KEY = "ffd39e8293c94f3c8fe195415232612";
+LOCATIONTEXTFIELD.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    getCurrentWeather(LOCATIONTEXTFIELD.value).then((result) => {
+      (async () => {
+        locationCurrentTime = result["location"]["localtime"];
+        let weatherData = await createCurrentWeatherDataObject(result);
+        refreshPage(await weatherData);
+      })();
+    });
+  }
+});
+
 function createDayArray(nextSixHoursArray) {
   let result = [];
-  if (nextSixHoursArray.includes(1) === false) {
+  console.log("day");
+  console.log(nextSixHoursArray[6].getDate());
+  if (nextSixHoursArray[6].getDate() === nextSixHoursArray[0].getDate()) {
     result = [0, 0, 0, 0, 0, 0, 0];
     return result;
   } else {
     let index;
     for (let i = 0; i <= nextSixHoursArray.length; i++) {
-      if (nextSixHoursArray[i] === 23 && nextSixHoursArray[i + 1] === 0) {
+      if (
+        nextSixHoursArray[i].getHours() === 23 &&
+        nextSixHoursArray[i + 1].getHours() === 0
+      ) {
         index = i;
+        break;
       }
     }
     for (let k = 0; k <= 6; k++) {
@@ -81,7 +111,6 @@ function createDayArray(nextSixHoursArray) {
         result.push(1);
       }
     }
-    console.log(`result ${result}`);
     return result;
   }
 }
@@ -90,10 +119,10 @@ function getNextSixHoursInDisplayForm() {
   let nextSixHoursArray24format = mapHoursToArray(getHours());
 
   let nextSixHoursArray = nextSixHoursArray24format.map((element) => {
-    if (element === 0) {
+    if (element.getHours() === 0) {
       return `0:00`;
     } else {
-      return `${element}:00`;
+      return `${element.getHours()}:00`;
     }
   });
   return nextSixHoursArray;
@@ -127,12 +156,12 @@ function addSufixToDayNumber(dayOfTheMonth) {
 }
 
 function getNextThreeDays() {
-  let tomorrrow = new Date();
-  tomorrrow.setDate(tomorrrow.getDate() + 1);
+  let tomorrow = new Date(locationCurrentTime);
+  tomorrow.setDate(tomorrow.getDate() + 1);
   let oneDayAfterTomorrow = new Date();
-  oneDayAfterTomorrow.setDate(tomorrrow.getDate() + 1);
+  oneDayAfterTomorrow.setDate(tomorrow.getDate() + 1);
   let TwoDaysAfterTomorrow = new Date();
-  TwoDaysAfterTomorrow.setDate(tomorrrow.getDate() + 2);
+  TwoDaysAfterTomorrow.setDate(tomorrow.getDate() + 2);
 
   let days = [
     "Sunday",
@@ -149,25 +178,22 @@ function getNextThreeDays() {
     oneDayAfterTomorrowAsWrittenDay,
     TwoDaysAfterTomorrowAsWrittenDay,
   ] = [
-    addSufixToDayNumber(tomorrrow.getDate()),
+    addSufixToDayNumber(tomorrow.getDate()),
     addSufixToDayNumber(oneDayAfterTomorrow.getDate()),
     addSufixToDayNumber(TwoDaysAfterTomorrow.getDate()),
   ];
 
   let daysObject = {
-    0: [days[tomorrrow.getDay()], tomorrrowAsWrittenDay],
+    0: [days[tomorrow.getDay()], tomorrrowAsWrittenDay],
     1: [days[oneDayAfterTomorrow.getDay()], oneDayAfterTomorrowAsWrittenDay],
     2: [days[TwoDaysAfterTomorrow.getDay()], TwoDaysAfterTomorrowAsWrittenDay],
   };
-  console.log("tomorrowAsANumber:");
-  console.log(tomorrrow.getDay());
+
   return daysObject;
 }
 
 async function createCurrentWeatherDataObject(weatherData) {
   let nextSixHoursArray = mapHoursToArray(getHours());
-  console.log("nextsixhours array:");
-  console.log(nextSixHoursArray);
   let day = createDayArray(nextSixHoursArray);
 
   const CURRENT_WEATHER_DATA_OBJECT = {
@@ -184,62 +210,62 @@ async function createCurrentWeatherDataObject(weatherData) {
       UV: weatherData["current"]["uv"],
     },
     nextsixhours: {
-      [`${nextSixHoursArray[0]}_tempC`]:
+      [`${nextSixHoursArray[0].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[0]]["hour"][
-          nextSixHoursArray[0]
+          nextSixHoursArray[0].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[0]}_tempF`]:
+      [`${nextSixHoursArray[0].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[0]]["hour"][
-          nextSixHoursArray[0]
+          nextSixHoursArray[0].getHours()
         ]["temp_f"],
 
-      [`${nextSixHoursArray[1]}_tempC`]:
+      [`${nextSixHoursArray[1].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[1]]["hour"][
-          nextSixHoursArray[1]
+          nextSixHoursArray[1].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[1]}_tempF`]:
+      [`${nextSixHoursArray[1].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[1]]["hour"][
-          nextSixHoursArray[1]
+          nextSixHoursArray[1].getHours()
         ]["temp_f"],
-      [`${nextSixHoursArray[2]}_tempC`]:
+      [`${nextSixHoursArray[2].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[2]]["hour"][
-          nextSixHoursArray[2]
+          nextSixHoursArray[2].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[2]}_tempF`]:
+      [`${nextSixHoursArray[2].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[2]]["hour"][
-          nextSixHoursArray[2]
+          nextSixHoursArray[2].getHours()
         ]["temp_f"],
-      [`${nextSixHoursArray[3]}_tempC`]:
+      [`${nextSixHoursArray[3].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[3]]["hour"][
-          nextSixHoursArray[3]
+          nextSixHoursArray[3].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[3]}_tempF`]:
+      [`${nextSixHoursArray[3].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[3]]["hour"][
-          nextSixHoursArray[3]
+          nextSixHoursArray[3].getHours()
         ]["temp_f"],
-      [`${nextSixHoursArray[4]}_tempC`]:
+      [`${nextSixHoursArray[4].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[4]]["hour"][
-          nextSixHoursArray[4]
+          nextSixHoursArray[4].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[4]}_tempF`]:
+      [`${nextSixHoursArray[4].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[4]]["hour"][
-          nextSixHoursArray[4]
+          nextSixHoursArray[4].getHours()
         ]["temp_f"],
-      [`${nextSixHoursArray[5]}_tempC`]:
+      [`${nextSixHoursArray[5].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[5]]["hour"][
-          nextSixHoursArray[5]
+          nextSixHoursArray[5].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[5]}_tempF`]:
+      [`${nextSixHoursArray[5].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[5]]["hour"][
-          nextSixHoursArray[5]
+          nextSixHoursArray[5].getHours()
         ]["temp_f"],
-      [`${nextSixHoursArray[6]}_tempC`]:
+      [`${nextSixHoursArray[6].getHours()}_tempC`]:
         weatherData["forecast"]["forecastday"][day[6]]["hour"][
-          nextSixHoursArray[6]
+          nextSixHoursArray[6].getHours()
         ]["temp_c"],
-      [`${nextSixHoursArray[6]}_tempF`]:
+      [`${nextSixHoursArray[6].getHours()}_tempF`]:
         weatherData["forecast"]["forecastday"][day[6]]["hour"][
-          nextSixHoursArray[6]
+          nextSixHoursArray[6].getHours()
         ]["temp_f"],
     },
     nextThreeDays: {
@@ -275,7 +301,6 @@ async function createCurrentWeatherDataObject(weatherData) {
       },
     },
   };
-  console.log(CURRENT_WEATHER_DATA_OBJECT);
   return CURRENT_WEATHER_DATA_OBJECT;
 }
 
@@ -284,28 +309,26 @@ function getTodayTempObject(weatherData) {
 
   let resultObject = {
     celsius: [
-      weatherData["nextsixhours"][`${nextSixHours[0]}_tempC`],
-      weatherData["nextsixhours"][`${nextSixHours[1]}_tempC`],
-      weatherData["nextsixhours"][`${nextSixHours[2]}_tempC`],
-      weatherData["nextsixhours"][`${nextSixHours[3]}_tempC`],
-      weatherData["nextsixhours"][`${nextSixHours[4]}_tempC`],
-      weatherData["nextsixhours"][`${nextSixHours[5]}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[0].getHours()}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[1].getHours()}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[2].getHours()}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[3].getHours()}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[4].getHours()}_tempC`],
+      weatherData["nextsixhours"][`${nextSixHours[5].getHours()}_tempC`],
     ],
     fahrenheit: [
-      weatherData["nextsixhours"][`${nextSixHours[0]}_tempF`],
-      weatherData["nextsixhours"][`${nextSixHours[1]}_tempF`],
-      weatherData["nextsixhours"][`${nextSixHours[2]}_tempF`],
-      weatherData["nextsixhours"][`${nextSixHours[3]}_tempF`],
-      weatherData["nextsixhours"][`${nextSixHours[4]}_tempF`],
-      weatherData["nextsixhours"][`${nextSixHours[5]}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[0].getHours()}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[1].getHours()}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[2].getHours()}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[3].getHours()}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[4].getHours()}_tempF`],
+      weatherData["nextsixhours"][`${nextSixHours[5].getHours()}_tempF`],
     ],
   };
   return resultObject;
 }
 
 function refreshWeatherCards(weatherData) {
-  console.log("weatherData");
-  console.log(weatherData);
   const [
     FIRST_DAY_TEMP,
     FIRST_DAY_NIGHT_TEMP,
@@ -477,13 +500,12 @@ BUTTON.addEventListener("click", (event) => {
   }
 });
 
-getTimeInTwelveHourFormat();
-
 getCurrentWeather("Warsaw").then((result) => {
   (async () => {
+    locationCurrentTime = result["location"]["localtime"];
     let weatherData = await createCurrentWeatherDataObject(result);
     refreshPage(await weatherData);
   })();
 });
 
-console.log(getNextThreeDays());
+getTimeInTwelveHourFormat();
