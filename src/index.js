@@ -8,15 +8,17 @@ import gradient from "../assets/mesh-gradient.png";
 import { add } from "date-fns";
 import "./style.css";
 
+localStorage.clear();
+
 function getHours() {
   const LOCAL_TIME = new Date(Date.parse(locationCurrentTime));
   const HOURS = LOCAL_TIME.getHours();
-  console.log("currentLocationTime");
-  console.log(locationCurrentTime);
+
   return HOURS;
 }
 
 let locationCurrentTime;
+let tempUnits = "celsius";
 
 function mapHoursToArray(hours) {
   let array = [];
@@ -41,11 +43,8 @@ function mapHoursToArray(hours) {
     //   array.push(i - 24);
     // }
   }
-  console.log(array);
   return array;
 }
-
-let tempUnits = "celsius";
 
 function getTimeInTwelveHourFormat() {
   const CURRENT_DATE = new Date();
@@ -54,7 +53,6 @@ function getTimeInTwelveHourFormat() {
     minute: "numeric",
     hour12: true,
   });
-  console.log(RESULT);
   return RESULT;
 }
 
@@ -72,7 +70,6 @@ async function getCurrentWeather(location) {
 }
 
 const LOCATIONTEXTFIELD = document.getElementById("location-input");
-
 const KEY = "ffd39e8293c94f3c8fe195415232612";
 LOCATIONTEXTFIELD.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -80,7 +77,8 @@ LOCATIONTEXTFIELD.addEventListener("keydown", (event) => {
       (async () => {
         locationCurrentTime = result["location"]["localtime"];
         let weatherData = await createCurrentWeatherDataObject(result);
-        refreshPage(await weatherData);
+        refreshPage(await weatherData, result);
+        localStorage.setItem("weatherData", JSON.stringify(weatherData));
       })();
     });
   }
@@ -88,8 +86,7 @@ LOCATIONTEXTFIELD.addEventListener("keydown", (event) => {
 
 function createDayArray(nextSixHoursArray) {
   let result = [];
-  console.log("day");
-  console.log(nextSixHoursArray[6].getDate());
+
   if (nextSixHoursArray[6].getDate() === nextSixHoursArray[0].getDate()) {
     result = [0, 0, 0, 0, 0, 0, 0];
     return result;
@@ -156,12 +153,11 @@ function addSufixToDayNumber(dayOfTheMonth) {
 }
 
 function getNextThreeDays() {
-  let tomorrow = new Date(locationCurrentTime);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  let today = new Date(locationCurrentTime);
+  let tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
   let oneDayAfterTomorrow = new Date();
-  oneDayAfterTomorrow.setDate(tomorrow.getDate() + 1);
-  let TwoDaysAfterTomorrow = new Date();
-  TwoDaysAfterTomorrow.setDate(tomorrow.getDate() + 2);
+  oneDayAfterTomorrow.setDate(today.getDate() + 2);
 
   let days = [
     "Sunday",
@@ -174,19 +170,19 @@ function getNextThreeDays() {
   ];
 
   let [
+    todayAsAWrittenDay,
     tomorrrowAsWrittenDay,
     oneDayAfterTomorrowAsWrittenDay,
-    TwoDaysAfterTomorrowAsWrittenDay,
   ] = [
+    addSufixToDayNumber(today.getDate()),
     addSufixToDayNumber(tomorrow.getDate()),
     addSufixToDayNumber(oneDayAfterTomorrow.getDate()),
-    addSufixToDayNumber(TwoDaysAfterTomorrow.getDate()),
   ];
 
   let daysObject = {
-    0: [days[tomorrow.getDay()], tomorrrowAsWrittenDay],
-    1: [days[oneDayAfterTomorrow.getDay()], oneDayAfterTomorrowAsWrittenDay],
-    2: [days[TwoDaysAfterTomorrow.getDay()], TwoDaysAfterTomorrowAsWrittenDay],
+    0: [days[today.getDay()], todayAsAWrittenDay],
+    1: [days[tomorrow.getDay()], tomorrrowAsWrittenDay],
+    2: [days[oneDayAfterTomorrow.getDay()], oneDayAfterTomorrowAsWrittenDay],
   };
 
   return daysObject;
@@ -279,7 +275,7 @@ async function createCurrentWeatherDataObject(weatherData) {
         maximumWindSpeedKPH:
           weatherData["forecast"]["forecastday"][1]["day"]["maxwind_kph"],
         maximumWindSpeedMPH:
-          weatherData["forecast"]["forecastday"][1]["day"]["maxwind_kph"],
+          weatherData["forecast"]["forecastday"][1]["day"]["maxwind_mph"],
         precipitationInMm:
           weatherData["forecast"]["forecastday"][1]["day"]["totalprecip_mm"],
         UVIndex: weatherData["forecast"]["forecastday"][1]["day"]["uv"],
@@ -397,10 +393,44 @@ function refreshWeatherCards(weatherData) {
       `${weatherData["nextThreeDays"][2]["precipitationInMm"]} mm`,
       weatherData["nextThreeDays"][2]["UVIndex"],
     ];
+  } else {
+    [
+      FIRST_DAY_TEMP.textContent,
+      FIRST_DAY_NIGHT_TEMP.textContent,
+      FIRST_DAY_WIND.textContent,
+      FIRST_DAY_PRECIPITATION.textContent,
+      FIRST_DAY_UV.textContent,
+      SECOND_DAY_TEMP.textContent,
+      SECOND_DAY_NIGHT_TEMP.textContent,
+      SECOND_DAY_WIND.textContent,
+      SECOND_DAY_PRECIPITATION.textContent,
+      SECOND_DAY_UV.textContent,
+      THIRD_DAY_TEMP.textContent,
+      THIRD_DAY_NIGHT_TEMP.textContent,
+      THIRD_DAY_WIND.textContent,
+      THIRD_DAY_PRECIPITATION.textContent,
+      THIDR_DAY_UV.textContent,
+    ] = [
+      `${weatherData["currentWeather"]["temperatureF"]}\xB0F`,
+      `${weatherData["currentWeather"]["nightTemperatureF"]}\xB0F`,
+      `${weatherData["currentWeather"]["windspeedMPH"]} mph`,
+      `${weatherData["currentWeather"]["precipitation"]} mm`,
+      weatherData["currentWeather"]["UV"],
+      `${weatherData["nextThreeDays"][1]["temp_f"]}\xB0F`,
+      `${weatherData["nextThreeDays"][1]["nighttemp_f"]}\xB0F`,
+      `${weatherData["nextThreeDays"][1]["maximumWindSpeedMPH"]} mph`,
+      `${weatherData["nextThreeDays"][1]["precipitationInMm"]} mm`,
+      weatherData["nextThreeDays"][1]["UVIndex"],
+      `${weatherData["nextThreeDays"][2]["temp_f"]}\xB0F`,
+      `${weatherData["nextThreeDays"][2]["nighttemp_f"]}\xB0f`,
+      `${weatherData["nextThreeDays"][2]["maximumWindSpeedMPH"]} mph`,
+      `${weatherData["nextThreeDays"][2]["precipitationInMm"]} mm`,
+      weatherData["nextThreeDays"][2]["UVIndex"],
+    ];
   }
 }
 
-function refreshPage(weatherData) {
+function refreshPage(weatherData, result) {
   const nextSixHoursArray = getNextSixHoursInDisplayForm();
   let tempeartureObject = getTodayTempObject(weatherData);
   let arrayObjectOfNextThreeDaysObj = getNextThreeDays();
@@ -439,26 +469,53 @@ function refreshPage(weatherData) {
     `${tempeartureObject[tempUnits][4]}\xB0${tempUnitsymbol}`,
   ];
 
-  const [DAY_TEMP, NIGHT_TEMP, PERCEPITATION_TODAY, WIND_TODAY, UVINDEX_TODAY] =
-    [
-      document.getElementById("today-day-temp"),
-      document.getElementById("today-night-temp"),
-      document.getElementById("today-precipitation"),
-      document.getElementById("today-wind"),
-      document.getElementById("today-uv"),
-    ];
+  const [
+    DAY_TEMP,
+    NIGHT_TEMP,
+    PERCEPITATION_TODAY,
+    WIND_TODAY,
+    UVINDEX_TODAY,
+    USER_LOCATION,
+    LOCAL_TIME,
+    HEADER_TEMP,
+  ] = [
+    document.getElementById("today-day-temp"),
+    document.getElementById("today-night-temp"),
+    document.getElementById("today-precipitation"),
+    document.getElementById("today-wind"),
+    document.getElementById("today-uv"),
+    document.getElementById("local-location"),
+    document.getElementById("local-time"),
+    document.getElementById("header-temp"),
+  ];
+
+  let minutes;
+  let hours = new Date(Date.parse(locationCurrentTime)).getHours();
+  if (new Date(Date.parse(locationCurrentTime)).getMinutes() < 10) {
+    minutes = `0${new Date(Date.parse(locationCurrentTime)).getMinutes()}`;
+  } else {
+    minutes = `${new Date(Date.parse(locationCurrentTime)).getMinutes()}`;
+  }
+  let localTime = `${hours}:${minutes}`;
 
   if (tempUnits === "celsius") {
-    [DAY_TEMP.textContent, NIGHT_TEMP.textContent] = [
-      `${weatherData["currentWeather"]["temperatureC"]}\xB0`,
-      `${weatherData["currentWeather"]["nightTemperatureC"]}\xB0`,
+    [DAY_TEMP.textContent, NIGHT_TEMP.textContent, HEADER_TEMP.textContent] = [
+      `${weatherData["currentWeather"]["temperatureC"]}\xB0C`,
+      `${weatherData["currentWeather"]["nightTemperatureC"]}\xB0C`,
+      `${weatherData["currentWeather"]["nightTemperatureC"]}\xB0C`,
     ];
   } else {
-    [DAY_TEMP.textContent, NIGHT_TEMP.textContent] = [
-      `${weatherData["currentWeather"]["temperatureF"]}\xB0`,
-      `${weatherData["currentWeather"]["nightTemperatureF"]}\xB0`,
+    [DAY_TEMP.textContent, NIGHT_TEMP.textContent, HEADER_TEMP.textContent] = [
+      `${weatherData["currentWeather"]["temperatureF"]}\xB0F`,
+      `${weatherData["currentWeather"]["nightTemperatureF"]}\xB0F`,
+      `${weatherData["currentWeather"]["temperatureF"]}\xB0F`,
     ];
   }
+
+  [USER_LOCATION.textContent, LOCAL_TIME.textContent] = [
+    `${result["location"]["name"]}, ${result["location"]["country"]}`,
+    `${localTime}`,
+  ];
 
   [
     PERCEPITATION_TODAY.textContent,
@@ -494,17 +551,152 @@ BUTTON.addEventListener("click", (event) => {
   if (BUTTON.classList.contains("fahrenheit")) {
     BUTTON.textContent = `Switch to (C\u00B0)`;
     BUTTON.classList.remove("fahrenheit");
+    tempUnits = "celsius";
   } else {
     BUTTON.textContent = `Switch to (F\u00B0)`;
     BUTTON.classList.add("fahrenheit");
+    tempUnits = "fahrenheit";
   }
+  refreshTemperature();
 });
+
+function refreshTemperature() {
+  const WEATHER_DATA = JSON.parse(localStorage.getItem("weatherData"));
+  console.log("weatherData:");
+  console.log(WEATHER_DATA);
+  let tempeartureObject = getTodayTempObject(WEATHER_DATA);
+  console.log("temperature😭:object");
+  console.log(tempeartureObject);
+
+  const [
+    HEADER_TEMP,
+    TODAY_DAY_TEMP,
+    TODAY_NIGHT_TEMP,
+    TODAY_WIND,
+    FIRST_HOUR_TEMP,
+    SECOND_HOUR_TEMP,
+    THIRD_HOUR_TEMP,
+    FOURTH_HOUR_TEMP,
+    FIFTH_HOUR_TEMP,
+    FIRST_DAY_TEMP,
+    FIRST_DAY_NIGHT_TEMP,
+    FIRST_DAY_WIND,
+    SECOND_DAY_TEMP,
+    SECOND_DAY_NIGHT_TEMP,
+    SECOND_DAY_WIND,
+    THIRD_DAY_TEMP,
+    THIRD_DAY_NIGHT_TEMP,
+    THIRD_DAY_WIND,
+  ] = [
+    document.getElementById("header-temp"),
+    document.getElementById("today-day-temp"),
+    document.getElementById("today-night-temp"),
+    document.getElementById("today-wind"),
+    document.getElementById("1st-hour-temp"),
+    document.getElementById("2nd-hour-temp"),
+    document.getElementById("3rd-hour-temp"),
+    document.getElementById("4th-hour-temp"),
+    document.getElementById("5th-hour-temp"),
+    document.getElementById("1st-day-temp"),
+    document.getElementById("1st-day-night-temp"),
+    document.getElementById("1st-day-wind"),
+    document.getElementById("2nd-day-temp"),
+    document.getElementById("2nd-day-night-temp"),
+    document.getElementById("2nd-day-wind"),
+    document.getElementById("3rd-day-temp"),
+    document.getElementById("3rd-day-night-temp"),
+    document.getElementById("3rd-day-wind"),
+  ];
+
+  if (tempUnits === "celsius") {
+    [
+      HEADER_TEMP.textContent,
+      TODAY_DAY_TEMP.textContent,
+      TODAY_NIGHT_TEMP.textContent,
+      TODAY_WIND.textContent,
+      FIRST_HOUR_TEMP.textContent,
+      SECOND_HOUR_TEMP.textContent,
+      THIRD_HOUR_TEMP.textContent,
+      FOURTH_HOUR_TEMP.textContent,
+      FIFTH_HOUR_TEMP.textContent,
+      FIRST_DAY_TEMP.textContent,
+      FIRST_DAY_NIGHT_TEMP.textContent,
+      FIRST_DAY_WIND.textContent,
+      SECOND_DAY_TEMP.textContent,
+      SECOND_DAY_NIGHT_TEMP.textContent,
+      SECOND_DAY_WIND.textContent,
+      THIRD_DAY_TEMP.textContent,
+      THIRD_DAY_NIGHT_TEMP.textContent,
+      THIRD_DAY_WIND.textContent,
+    ] = [
+      `${WEATHER_DATA["currentWeather"]["temperatureC"]}\xB0C`,
+      `${WEATHER_DATA["currentWeather"]["temperatureC"]}\xB0C`,
+      `${WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"]}\xB0C`,
+      `${WEATHER_DATA["currentWeather"]["windspeedKMH"]} km/h`,
+      `${tempeartureObject["celsius"][0]}\xB0C`,
+      `${tempeartureObject["celsius"][1]}\xB0C`,
+      `${tempeartureObject["celsius"][2]}\xB0C`,
+      `${tempeartureObject["celsius"][3]}\xB0C`,
+      `${tempeartureObject["celsius"][4]}\xB0C`,
+      `${WEATHER_DATA["currentWeather"]["temperatureC"]}\xB0C`,
+      `${WEATHER_DATA["currentWeather"]["nightTemperatureC"]}\xB0C`,
+      `${WEATHER_DATA["currentWeather"]["windspeedKMH"]} km/h`,
+      `${WEATHER_DATA["nextThreeDays"][1]["temp_c"]}\xB0C`,
+      `${WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"]}\xB0C`,
+      `${WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedKPH"]} km/h`,
+      `${WEATHER_DATA["nextThreeDays"][2]["temp_c"]}\xB0C`,
+      `${WEATHER_DATA["nextThreeDays"][2]["nighttemp_c"]}\xB0C`,
+      `${WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedKMH"]} km/h`,
+    ];
+  } else {
+    [
+      HEADER_TEMP.textContent,
+      TODAY_DAY_TEMP.textContent,
+      TODAY_NIGHT_TEMP.textContent,
+      TODAY_WIND.textContent,
+      FIRST_HOUR_TEMP.textContent,
+      SECOND_HOUR_TEMP.textContent,
+      THIRD_HOUR_TEMP.textContent,
+      FOURTH_HOUR_TEMP.textContent,
+      FIFTH_HOUR_TEMP.textContent,
+      FIRST_DAY_TEMP.textContent,
+      FIRST_DAY_NIGHT_TEMP.textContent,
+      FIRST_DAY_WIND.textContent,
+      SECOND_DAY_TEMP.textContent,
+      SECOND_DAY_NIGHT_TEMP.textContent,
+      SECOND_DAY_WIND.textContent,
+      THIRD_DAY_TEMP.textContent,
+      THIRD_DAY_NIGHT_TEMP.textContent,
+      THIRD_DAY_WIND.textContent,
+    ] = [
+      `${WEATHER_DATA["currentWeather"]["temperatureF"]}\xB0F`,
+      `${WEATHER_DATA["currentWeather"]["temperatureF"]}\xB0F`,
+      `${WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"]}\xB0F`,
+      `${WEATHER_DATA["currentWeather"]["windspeedMPH"]} mph`,
+      `${tempeartureObject["fahrenheit"][0]}\xB0F`,
+      `${tempeartureObject["fahrenheit"][1]}\xB0F`,
+      `${tempeartureObject["fahrenheit"][2]}\xB0F`,
+      `${tempeartureObject["fahrenheit"][3]}\xB0F`,
+      `${tempeartureObject["fahrenheit"][4]}\xB0F`,
+      `${WEATHER_DATA["currentWeather"]["temperatureF"]}\xB0F`,
+      `${WEATHER_DATA["currentWeather"]["nightTemperatureF"]}\xB0F`,
+      `${WEATHER_DATA["currentWeather"]["windspeedMPH"]} mph`,
+      `${WEATHER_DATA["nextThreeDays"][1]["temp_f"]}\xB0F`,
+      `${WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"]}\xB0F`,
+      `${WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedMPH"]} mph`,
+      `${WEATHER_DATA["nextThreeDays"][2]["temp_f"]}\xB0F`,
+      `${WEATHER_DATA["nextThreeDays"][2]["nighttemp_f"]}\xB0F`,
+      `${WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedMPH"]} mph`,
+    ];
+  }
+}
 
 getCurrentWeather("Warsaw").then((result) => {
   (async () => {
     locationCurrentTime = result["location"]["localtime"];
     let weatherData = await createCurrentWeatherDataObject(result);
-    refreshPage(await weatherData);
+    refreshPage(await weatherData, result);
+    localStorage.setItem("weatherData", JSON.stringify(weatherData));
   })();
 });
 
