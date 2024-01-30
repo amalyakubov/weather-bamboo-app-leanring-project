@@ -236,7 +236,8 @@ table#hourly-temperature-view {
 div.hourly-temperature-view-container {
   display: flex;
   justify-content: center;
-  margin: 5em;
+  margin: 2em;
+  margin-right: 5em;
   border-radius: 20px;
 }
 
@@ -260,7 +261,6 @@ div#cards {
   grid-column: 1 / 3;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10vh;
   gap: 50px;
   padding: 20px;
 }
@@ -287,8 +287,8 @@ button#switch-degree-measurement-button {
 div.card-container {
   display: flex;
   padding: 50px;
-  padding-top: 4em;
-  padding-bottom: 5em;
+  padding-top: 3em;
+  padding-bottom: 4em;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -405,4 +405,51 @@ input[type="text"]:focus {
 button#switch-degree-measurement-button.fahrenheit {
   color: white;
   background-color: #1f1f1f;
+}
+
+@media screen and (max-width: 950px) {
+  div#grid-wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
+  }
+
+  div.location-temp-container {
+    grid-column: 1 / 2;
+  }
+
+  div.hourly-temperature-view-container {
+    grid-column: 1 / 2;
+  }
+
+  footer {
+    box-sizing: border-box;
+    flex-direction: column;
+  }
+
+  div#hr {
+    width: 69vw;
+    height: 1px;
+    align-items: center;
+  }
+
+  div#cards {
+    grid-column: 1 / 2;
+  }
+
+  button#switch-degree-measurement-button {
+    font-size: 15px;
+  }
+
+  div.hourly-temperature-view-container {
+    margin-right: 0em;
+  }
+
+  table#weather-overview-table,
+  div.hourly-temperature-view-container {
+    height: 350px;
+  }
+
+  div#local-weather-data {
+    height: 4em;
+  }
 }
