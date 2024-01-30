@@ -199,7 +199,6 @@ div#local-weather-data p {
 
 table#weather-overview-table {
   border: 0px solid #fff;
-  box-shadow: 0px 4px 6.8px 1px rgba(155, 155, 155, 0.25);
   backdrop-filter: blur(9.899999618530273px);
   padding: 50px;
   grid-column: 1 / span 1;
@@ -246,13 +245,14 @@ input#location-input {
 }
 
 table {
-  background-color: rgba(12, 12, 12, 0.9);
+  background-color: rgba(12, 12, 12, 1);
   color: white;
   border: none;
+  -webkit-backdrop-filter: blur(10px);
 }
 
 table td {
-  outline: 1px solid rgb(27, 27, 27);
+  outline: 1px solid rgb(27, 27, 27, 0.5);
   text-align: center;
   vertical-align: middle;
 }
@@ -273,7 +273,7 @@ button#switch-degree-measurement-button {
   display: flex;
   align-items: center;
   color: black;
-  background-color: rgb(245, 245, 245);
+  background-color: rgba(245, 245, 245);
   font-size: 20px;
   letter-spacing: 2px;
   border: none;
@@ -292,10 +292,10 @@ div.card-container {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #131313;
+  background-color: rgba(19, 19, 19, 1);
+  backdrop-filter: blur(10px);
   color: white;
   border-radius: 10px;
-  backdrop-filter: blur(10px);
 }
 
 div.card-container h3 {
@@ -304,14 +304,17 @@ div.card-container h3 {
 }
 
 div.card-container p {
-  font-size: 15px;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
 }
 
 ul.day-weather-info-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 10px;
+  gap: 15px;
+  padding-top: 15px;
 }
 
 ul.day-weather-info-list li {
@@ -391,9 +394,10 @@ input[type="text"] {
   border: none;
   padding: 20px;
   padding-left: 2em;
-  background-color: #eeeeee;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 input[type="text"]:focus {
@@ -405,6 +409,12 @@ input[type="text"]:focus {
 button#switch-degree-measurement-button.fahrenheit {
   color: white;
   background-color: #1f1f1f;
+}
+
+img {
+  fill: color;
+  display: flex;
+  height: 40px;
 }
 
 @media screen and (max-width: 950px) {
