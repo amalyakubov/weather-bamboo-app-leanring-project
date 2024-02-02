@@ -313,7 +313,7 @@ ul.day-weather-info-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 15px;
+  gap: 20px;
   padding-top: 15px;
 }
 

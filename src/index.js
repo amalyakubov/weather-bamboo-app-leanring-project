@@ -430,6 +430,34 @@ function refreshWeatherCards(weatherData) {
   }
 }
 
+function loadForecastIcons(result) {
+  const [
+    FIRST_DAY_HEADING_FORECAST_ICON,
+    FIRST_DAY_CARD_FORECAST_ICON,
+    SECOND_DAY_FORECAST_ICON,
+    THIRD_DAY_FORECAST_ICON,
+  ] = [
+    document.getElementById("current-weather-icon"),
+    document.getElementById("current-weather-card-icon"),
+    document.getElementById("second-day-forecast-icon"),
+    document.getElementById("third-day-forecast-icon"),
+  ];
+
+  [
+    FIRST_DAY_HEADING_FORECAST_ICON.src,
+    FIRST_DAY_CARD_FORECAST_ICON.src,
+    SECOND_DAY_FORECAST_ICON.src,
+    THIRD_DAY_FORECAST_ICON.src,
+  ] = [
+    `${result["current"]["condition"]["icon"]}`,
+    `${result["current"]["condition"]["icon"]}`,
+    `${result["forecast"]["forecastday"]["1"]["day"]["condition"]["icon"]}`,
+    `${result["forecast"]["forecastday"]["2"]["day"]["condition"]["icon"]}`,
+    ,
+  ];
+  console.log(`${result["current"]["condition"]["icon"]}`);
+}
+
 function refreshPage(weatherData, result) {
   const nextSixHoursArray = getNextSixHoursInDisplayForm();
   let tempeartureObject = getTodayTempObject(weatherData);
@@ -544,6 +572,7 @@ function refreshPage(weatherData, result) {
   ];
 
   refreshWeatherCards(weatherData);
+  loadForecastIcons(result);
 }
 
 const BUTTON = document.getElementById("switch-degree-measurement-button");
