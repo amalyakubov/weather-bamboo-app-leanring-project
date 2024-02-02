@@ -678,6 +678,19 @@ function refreshWeatherCards(weatherData) {
     THIDR_DAY_UV.textContent = _ref5[14];
   }
 }
+function loadForecastIcons(result) {
+  var _ref6 = [document.getElementById("current-weather-icon"), document.getElementById("current-weather-card-icon"), document.getElementById("second-day-forecast-icon"), document.getElementById("third-day-forecast-icon")],
+    FIRST_DAY_HEADING_FORECAST_ICON = _ref6[0],
+    FIRST_DAY_CARD_FORECAST_ICON = _ref6[1],
+    SECOND_DAY_FORECAST_ICON = _ref6[2],
+    THIRD_DAY_FORECAST_ICON = _ref6[3];
+  var _ref7 = ["".concat(result["current"]["condition"]["icon"]), "".concat(result["current"]["condition"]["icon"]), "".concat(result["forecast"]["forecastday"]["1"]["day"]["condition"]["icon"]), "".concat(result["forecast"]["forecastday"]["2"]["day"]["condition"]["icon"]),,];
+  FIRST_DAY_HEADING_FORECAST_ICON.src = _ref7[0];
+  FIRST_DAY_CARD_FORECAST_ICON.src = _ref7[1];
+  SECOND_DAY_FORECAST_ICON.src = _ref7[2];
+  THIRD_DAY_FORECAST_ICON.src = _ref7[3];
+  console.log("".concat(result["current"]["condition"]["icon"]));
+}
 function refreshPage(weatherData, result) {
   var nextSixHoursArray = getNextSixHoursInDisplayForm();
   var tempeartureObject = getTodayTempObject(weatherData);
@@ -698,21 +711,21 @@ function refreshPage(weatherData, result) {
   var THIRD_HOUR_TEMP = document.getElementById("3rd-hour-temp");
   var FOURTH_HOUR_TEMP = document.getElementById("4th-hour-temp");
   var FIFTH_HOUR_TEMP = document.getElementById("5th-hour-temp");
-  var _ref6 = ["".concat(tempeartureObject[tempUnits][0], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][1], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][2], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][3], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][4], "\xB0").concat(tempUnitsymbol)];
-  FIRST_HOUR_TEMP.textContent = _ref6[0];
-  SECOND_HOUR_TEMP.textContent = _ref6[1];
-  THIRD_HOUR_TEMP.textContent = _ref6[2];
-  FOURTH_HOUR_TEMP.textContent = _ref6[3];
-  FIFTH_HOUR_TEMP.textContent = _ref6[4];
-  var _ref7 = [document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-precipitation"), document.getElementById("today-wind"), document.getElementById("today-uv"), document.getElementById("local-location"), document.getElementById("local-time"), document.getElementById("header-temp")],
-    DAY_TEMP = _ref7[0],
-    NIGHT_TEMP = _ref7[1],
-    PERCEPITATION_TODAY = _ref7[2],
-    WIND_TODAY = _ref7[3],
-    UVINDEX_TODAY = _ref7[4],
-    USER_LOCATION = _ref7[5],
-    LOCAL_TIME = _ref7[6],
-    HEADER_TEMP = _ref7[7];
+  var _ref8 = ["".concat(tempeartureObject[tempUnits][0], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][1], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][2], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][3], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][4], "\xB0").concat(tempUnitsymbol)];
+  FIRST_HOUR_TEMP.textContent = _ref8[0];
+  SECOND_HOUR_TEMP.textContent = _ref8[1];
+  THIRD_HOUR_TEMP.textContent = _ref8[2];
+  FOURTH_HOUR_TEMP.textContent = _ref8[3];
+  FIFTH_HOUR_TEMP.textContent = _ref8[4];
+  var _ref9 = [document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-precipitation"), document.getElementById("today-wind"), document.getElementById("today-uv"), document.getElementById("local-location"), document.getElementById("local-time"), document.getElementById("header-temp")],
+    DAY_TEMP = _ref9[0],
+    NIGHT_TEMP = _ref9[1],
+    PERCEPITATION_TODAY = _ref9[2],
+    WIND_TODAY = _ref9[3],
+    UVINDEX_TODAY = _ref9[4],
+    USER_LOCATION = _ref9[5],
+    LOCAL_TIME = _ref9[6],
+    HEADER_TEMP = _ref9[7];
   var minutes;
   var hours = new Date(Date.parse(locationCurrentTime)).getHours();
   if (new Date(Date.parse(locationCurrentTime)).getMinutes() < 10) {
@@ -722,32 +735,33 @@ function refreshPage(weatherData, result) {
   }
   var localTime = "".concat(hours, ":").concat(minutes);
   if (tempUnits === "celsius") {
-    var _ref8 = ["".concat(weatherData["currentWeather"]["temperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C")];
-    DAY_TEMP.textContent = _ref8[0];
-    NIGHT_TEMP.textContent = _ref8[1];
-    HEADER_TEMP.textContent = _ref8[2];
+    var _ref10 = ["".concat(weatherData["currentWeather"]["temperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C")];
+    DAY_TEMP.textContent = _ref10[0];
+    NIGHT_TEMP.textContent = _ref10[1];
+    HEADER_TEMP.textContent = _ref10[2];
   } else {
-    var _ref9 = ["".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F")];
-    DAY_TEMP.textContent = _ref9[0];
-    NIGHT_TEMP.textContent = _ref9[1];
-    HEADER_TEMP.textContent = _ref9[2];
+    var _ref11 = ["".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F")];
+    DAY_TEMP.textContent = _ref11[0];
+    NIGHT_TEMP.textContent = _ref11[1];
+    HEADER_TEMP.textContent = _ref11[2];
   }
-  var _ref10 = ["".concat(result["location"]["name"], ", ").concat(result["location"]["country"]), "".concat(localTime)];
-  USER_LOCATION.textContent = _ref10[0];
-  LOCAL_TIME.textContent = _ref10[1];
-  var _ref11 = ["".concat(weatherData["currentWeather"]["precipitation"], "mm"), "".concat(weatherData["currentWeather"]["windspeedKMH"], "km/h"), weatherData["currentWeather"]["UV"]];
-  PERCEPITATION_TODAY.textContent = _ref11[0];
-  WIND_TODAY.textContent = _ref11[1];
-  UVINDEX_TODAY.textContent = _ref11[2];
-  var _ref12 = [document.getElementById("1st-day"), document.getElementById("2nd-day"), document.getElementById("3rd-day")],
-    FIRSTDAY_HEADING = _ref12[0],
-    SECOND_DAY_HEADING = _ref12[1],
-    THIRD_DAY_HEADING = _ref12[2];
-  var _ref13 = ["".concat(arrayObjectOfNextThreeDaysObj[0][0], ", ").concat(arrayObjectOfNextThreeDaysObj[0][1]), "".concat(arrayObjectOfNextThreeDaysObj[1][0], ", ").concat(arrayObjectOfNextThreeDaysObj[1][1]), "".concat(arrayObjectOfNextThreeDaysObj[2][0], ", ").concat(arrayObjectOfNextThreeDaysObj[2][1])];
-  FIRSTDAY_HEADING.textContent = _ref13[0];
-  SECOND_DAY_HEADING.textContent = _ref13[1];
-  THIRD_DAY_HEADING.textContent = _ref13[2];
+  var _ref12 = ["".concat(result["location"]["name"], ", ").concat(result["location"]["country"]), "".concat(localTime)];
+  USER_LOCATION.textContent = _ref12[0];
+  LOCAL_TIME.textContent = _ref12[1];
+  var _ref13 = ["".concat(weatherData["currentWeather"]["precipitation"], "mm"), "".concat(weatherData["currentWeather"]["windspeedKMH"], "km/h"), weatherData["currentWeather"]["UV"]];
+  PERCEPITATION_TODAY.textContent = _ref13[0];
+  WIND_TODAY.textContent = _ref13[1];
+  UVINDEX_TODAY.textContent = _ref13[2];
+  var _ref14 = [document.getElementById("1st-day"), document.getElementById("2nd-day"), document.getElementById("3rd-day")],
+    FIRSTDAY_HEADING = _ref14[0],
+    SECOND_DAY_HEADING = _ref14[1],
+    THIRD_DAY_HEADING = _ref14[2];
+  var _ref15 = ["".concat(arrayObjectOfNextThreeDaysObj[0][0], ", ").concat(arrayObjectOfNextThreeDaysObj[0][1]), "".concat(arrayObjectOfNextThreeDaysObj[1][0], ", ").concat(arrayObjectOfNextThreeDaysObj[1][1]), "".concat(arrayObjectOfNextThreeDaysObj[2][0], ", ").concat(arrayObjectOfNextThreeDaysObj[2][1])];
+  FIRSTDAY_HEADING.textContent = _ref15[0];
+  SECOND_DAY_HEADING.textContent = _ref15[1];
+  THIRD_DAY_HEADING.textContent = _ref15[2];
   refreshWeatherCards(weatherData);
+  loadForecastIcons(result);
 }
 var BUTTON = document.getElementById("switch-degree-measurement-button");
 BUTTON.addEventListener("click", function (event) {
@@ -769,65 +783,65 @@ function refreshTemperature() {
   var tempeartureObject = getTodayTempObject(WEATHER_DATA);
   console.log("temperature😭:object");
   console.log(tempeartureObject);
-  var _ref14 = [document.getElementById("header-temp"), document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-wind"), document.getElementById("1st-hour-temp"), document.getElementById("2nd-hour-temp"), document.getElementById("3rd-hour-temp"), document.getElementById("4th-hour-temp"), document.getElementById("5th-hour-temp"), document.getElementById("1st-day-temp"), document.getElementById("1st-day-night-temp"), document.getElementById("1st-day-wind"), document.getElementById("2nd-day-temp"), document.getElementById("2nd-day-night-temp"), document.getElementById("2nd-day-wind"), document.getElementById("3rd-day-temp"), document.getElementById("3rd-day-night-temp"), document.getElementById("3rd-day-wind")],
-    HEADER_TEMP = _ref14[0],
-    TODAY_DAY_TEMP = _ref14[1],
-    TODAY_NIGHT_TEMP = _ref14[2],
-    TODAY_WIND = _ref14[3],
-    FIRST_HOUR_TEMP = _ref14[4],
-    SECOND_HOUR_TEMP = _ref14[5],
-    THIRD_HOUR_TEMP = _ref14[6],
-    FOURTH_HOUR_TEMP = _ref14[7],
-    FIFTH_HOUR_TEMP = _ref14[8],
-    FIRST_DAY_TEMP = _ref14[9],
-    FIRST_DAY_NIGHT_TEMP = _ref14[10],
-    FIRST_DAY_WIND = _ref14[11],
-    SECOND_DAY_TEMP = _ref14[12],
-    SECOND_DAY_NIGHT_TEMP = _ref14[13],
-    SECOND_DAY_WIND = _ref14[14],
-    THIRD_DAY_TEMP = _ref14[15],
-    THIRD_DAY_NIGHT_TEMP = _ref14[16],
-    THIRD_DAY_WIND = _ref14[17];
+  var _ref16 = [document.getElementById("header-temp"), document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-wind"), document.getElementById("1st-hour-temp"), document.getElementById("2nd-hour-temp"), document.getElementById("3rd-hour-temp"), document.getElementById("4th-hour-temp"), document.getElementById("5th-hour-temp"), document.getElementById("1st-day-temp"), document.getElementById("1st-day-night-temp"), document.getElementById("1st-day-wind"), document.getElementById("2nd-day-temp"), document.getElementById("2nd-day-night-temp"), document.getElementById("2nd-day-wind"), document.getElementById("3rd-day-temp"), document.getElementById("3rd-day-night-temp"), document.getElementById("3rd-day-wind")],
+    HEADER_TEMP = _ref16[0],
+    TODAY_DAY_TEMP = _ref16[1],
+    TODAY_NIGHT_TEMP = _ref16[2],
+    TODAY_WIND = _ref16[3],
+    FIRST_HOUR_TEMP = _ref16[4],
+    SECOND_HOUR_TEMP = _ref16[5],
+    THIRD_HOUR_TEMP = _ref16[6],
+    FOURTH_HOUR_TEMP = _ref16[7],
+    FIFTH_HOUR_TEMP = _ref16[8],
+    FIRST_DAY_TEMP = _ref16[9],
+    FIRST_DAY_NIGHT_TEMP = _ref16[10],
+    FIRST_DAY_WIND = _ref16[11],
+    SECOND_DAY_TEMP = _ref16[12],
+    SECOND_DAY_NIGHT_TEMP = _ref16[13],
+    SECOND_DAY_WIND = _ref16[14],
+    THIRD_DAY_TEMP = _ref16[15],
+    THIRD_DAY_NIGHT_TEMP = _ref16[16],
+    THIRD_DAY_WIND = _ref16[17];
   if (tempUnits === "celsius") {
-    var _ref15 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(tempeartureObject["celsius"][0], "\xB0C"), "".concat(tempeartureObject["celsius"][1], "\xB0C"), "".concat(tempeartureObject["celsius"][2], "\xB0C"), "".concat(tempeartureObject["celsius"][3], "\xB0C"), "".concat(tempeartureObject["celsius"][4], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedKPH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedKMH"], " km/h")];
-    HEADER_TEMP.textContent = _ref15[0];
-    TODAY_DAY_TEMP.textContent = _ref15[1];
-    TODAY_NIGHT_TEMP.textContent = _ref15[2];
-    TODAY_WIND.textContent = _ref15[3];
-    FIRST_HOUR_TEMP.textContent = _ref15[4];
-    SECOND_HOUR_TEMP.textContent = _ref15[5];
-    THIRD_HOUR_TEMP.textContent = _ref15[6];
-    FOURTH_HOUR_TEMP.textContent = _ref15[7];
-    FIFTH_HOUR_TEMP.textContent = _ref15[8];
-    FIRST_DAY_TEMP.textContent = _ref15[9];
-    FIRST_DAY_NIGHT_TEMP.textContent = _ref15[10];
-    FIRST_DAY_WIND.textContent = _ref15[11];
-    SECOND_DAY_TEMP.textContent = _ref15[12];
-    SECOND_DAY_NIGHT_TEMP.textContent = _ref15[13];
-    SECOND_DAY_WIND.textContent = _ref15[14];
-    THIRD_DAY_TEMP.textContent = _ref15[15];
-    THIRD_DAY_NIGHT_TEMP.textContent = _ref15[16];
-    THIRD_DAY_WIND.textContent = _ref15[17];
+    var _ref17 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(tempeartureObject["celsius"][0], "\xB0C"), "".concat(tempeartureObject["celsius"][1], "\xB0C"), "".concat(tempeartureObject["celsius"][2], "\xB0C"), "".concat(tempeartureObject["celsius"][3], "\xB0C"), "".concat(tempeartureObject["celsius"][4], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedKPH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedKMH"], " km/h")];
+    HEADER_TEMP.textContent = _ref17[0];
+    TODAY_DAY_TEMP.textContent = _ref17[1];
+    TODAY_NIGHT_TEMP.textContent = _ref17[2];
+    TODAY_WIND.textContent = _ref17[3];
+    FIRST_HOUR_TEMP.textContent = _ref17[4];
+    SECOND_HOUR_TEMP.textContent = _ref17[5];
+    THIRD_HOUR_TEMP.textContent = _ref17[6];
+    FOURTH_HOUR_TEMP.textContent = _ref17[7];
+    FIFTH_HOUR_TEMP.textContent = _ref17[8];
+    FIRST_DAY_TEMP.textContent = _ref17[9];
+    FIRST_DAY_NIGHT_TEMP.textContent = _ref17[10];
+    FIRST_DAY_WIND.textContent = _ref17[11];
+    SECOND_DAY_TEMP.textContent = _ref17[12];
+    SECOND_DAY_NIGHT_TEMP.textContent = _ref17[13];
+    SECOND_DAY_WIND.textContent = _ref17[14];
+    THIRD_DAY_TEMP.textContent = _ref17[15];
+    THIRD_DAY_NIGHT_TEMP.textContent = _ref17[16];
+    THIRD_DAY_WIND.textContent = _ref17[17];
   } else {
-    var _ref16 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(tempeartureObject["fahrenheit"][0], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][1], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][2], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][3], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][4], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedMPH"], " mph")];
-    HEADER_TEMP.textContent = _ref16[0];
-    TODAY_DAY_TEMP.textContent = _ref16[1];
-    TODAY_NIGHT_TEMP.textContent = _ref16[2];
-    TODAY_WIND.textContent = _ref16[3];
-    FIRST_HOUR_TEMP.textContent = _ref16[4];
-    SECOND_HOUR_TEMP.textContent = _ref16[5];
-    THIRD_HOUR_TEMP.textContent = _ref16[6];
-    FOURTH_HOUR_TEMP.textContent = _ref16[7];
-    FIFTH_HOUR_TEMP.textContent = _ref16[8];
-    FIRST_DAY_TEMP.textContent = _ref16[9];
-    FIRST_DAY_NIGHT_TEMP.textContent = _ref16[10];
-    FIRST_DAY_WIND.textContent = _ref16[11];
-    SECOND_DAY_TEMP.textContent = _ref16[12];
-    SECOND_DAY_NIGHT_TEMP.textContent = _ref16[13];
-    SECOND_DAY_WIND.textContent = _ref16[14];
-    THIRD_DAY_TEMP.textContent = _ref16[15];
-    THIRD_DAY_NIGHT_TEMP.textContent = _ref16[16];
-    THIRD_DAY_WIND.textContent = _ref16[17];
+    var _ref18 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(tempeartureObject["fahrenheit"][0], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][1], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][2], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][3], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][4], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedMPH"], " mph")];
+    HEADER_TEMP.textContent = _ref18[0];
+    TODAY_DAY_TEMP.textContent = _ref18[1];
+    TODAY_NIGHT_TEMP.textContent = _ref18[2];
+    TODAY_WIND.textContent = _ref18[3];
+    FIRST_HOUR_TEMP.textContent = _ref18[4];
+    SECOND_HOUR_TEMP.textContent = _ref18[5];
+    THIRD_HOUR_TEMP.textContent = _ref18[6];
+    FOURTH_HOUR_TEMP.textContent = _ref18[7];
+    FIFTH_HOUR_TEMP.textContent = _ref18[8];
+    FIRST_DAY_TEMP.textContent = _ref18[9];
+    FIRST_DAY_NIGHT_TEMP.textContent = _ref18[10];
+    FIRST_DAY_WIND.textContent = _ref18[11];
+    SECOND_DAY_TEMP.textContent = _ref18[12];
+    SECOND_DAY_NIGHT_TEMP.textContent = _ref18[13];
+    SECOND_DAY_WIND.textContent = _ref18[14];
+    THIRD_DAY_TEMP.textContent = _ref18[15];
+    THIRD_DAY_NIGHT_TEMP.textContent = _ref18[16];
+    THIRD_DAY_WIND.textContent = _ref18[17];
   }
 }
 getCurrentWeather("Warsaw").then(function (result) {

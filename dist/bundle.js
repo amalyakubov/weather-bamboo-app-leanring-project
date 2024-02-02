@@ -380,7 +380,6 @@ div#local-weather-data p {
 
 table#weather-overview-table {
   border: 0px solid #fff;
-  box-shadow: 0px 4px 6.8px 1px rgba(155, 155, 155, 0.25);
   backdrop-filter: blur(9.899999618530273px);
   padding: 50px;
   grid-column: 1 / span 1;
@@ -427,13 +426,14 @@ input#location-input {
 }
 
 table {
-  background-color: rgba(12, 12, 12, 0.9);
+  background-color: rgba(12, 12, 12, 1);
   color: white;
   border: none;
+  -webkit-backdrop-filter: blur(10px);
 }
 
 table td {
-  outline: 1px solid rgb(27, 27, 27);
+  outline: 1px solid rgb(27, 27, 27, 0.5);
   text-align: center;
   vertical-align: middle;
 }
@@ -454,7 +454,7 @@ button#switch-degree-measurement-button {
   display: flex;
   align-items: center;
   color: black;
-  background-color: rgb(245, 245, 245);
+  background-color: rgba(245, 245, 245);
   font-size: 20px;
   letter-spacing: 2px;
   border: none;
@@ -473,10 +473,10 @@ div.card-container {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #131313;
+  background-color: rgba(19, 19, 19, 1);
+  backdrop-filter: blur(10px);
   color: white;
   border-radius: 10px;
-  backdrop-filter: blur(10px);
 }
 
 div.card-container h3 {
@@ -485,14 +485,17 @@ div.card-container h3 {
 }
 
 div.card-container p {
-  font-size: 15px;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
 }
 
 ul.day-weather-info-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
+  padding-top: 15px;
 }
 
 ul.day-weather-info-list li {
@@ -572,9 +575,10 @@ input[type="text"] {
   border: none;
   padding: 20px;
   padding-left: 2em;
-  background-color: #eeeeee;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 input[type="text"]:focus {
@@ -586,6 +590,12 @@ input[type="text"]:focus {
 button#switch-degree-measurement-button.fahrenheit {
   color: white;
   background-color: #1f1f1f;
+}
+
+img {
+  fill: color;
+  display: flex;
+  height: 40px;
 }
 
 @media screen and (max-width: 950px) {
@@ -634,7 +644,7 @@ button#switch-degree-measurement-button.fahrenheit {
     height: 4em;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import url(\"https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap\");\n@import url(\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap\");\n\n/* http://meyerweb.com/eric/tools/css/reset/ \n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\";\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n:root {\n  font-family: \"Lato\", sans-serif;\n}\n\nbody {\n  display: flex;\n  flex-direction: column;\n  width: 100vw;\n  min-height: 100vh;\n}\n\nfooter {\n  width: 100vw;\n  flex: 0 0 auto;\n}\n\ndiv.main {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  flex: 1 0 auto;\n  background-image: url(../assets/mesh-gradient.png);\n  background-size: cover;\n}\n\nh2,\nh3 {\n  font-weight: bold;\n}\n\ndiv#grid-wrapper {\n  gap: 110px;\n}\n\ndiv#grid-wrapper {\n  display: grid;\n  padding: 25px;\n  grid-template-columns: 1fr 2fr;\n  grid-template-rows: 10vh repeat(2, 1fr);\n}\n\ndiv#local-weather-data {\n  grid-column: 1 / 2;\n  display: flex;\n  justify-content: space-between;\n\n  padding: 15px;\n  padding-left: 50px;\n  padding-right: 50px;\n  color: white;\n  font-weight: 400;\n\n  border-radius: 20px;\n  border: 0px solid #fff;\n  background: rgb(12, 12, 12);\n  backdrop-filter: blur(9.8999996 18530273px);\n}\n\ndiv#local-weather-data > *,\ndiv#local-weather-data p {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 20px;\n}\n\ntable#weather-overview-table {\n  border: 0px solid #fff;\n  box-shadow: 0px 4px 6.8px 1px rgba(155, 155, 155, 0.25);\n  backdrop-filter: blur(9.899999618530273px);\n  padding: 50px;\n  grid-column: 1 / span 1;\n  margin: 2em;\n}\n\ntable#weather-overview-table tr :nth-child(1) {\n  border: none;\n}\n\ndiv#vertical-container {\n  display: flex;\n  flex-direction: column;\n}\n\ndiv.location-temp-container {\n  box-sizing: content-box;\n  display: flex;\n  justify-content: center;\n  margin-top: 0.5em;\n  gap: 50px;\n  grid-row: 1 / 2;\n  grid-column: 2 / 3;\n  width: 100%;\n  height: 51px;\n  flex-shrink: 0;\n  padding: 10px;\n}\n\ntable#hourly-temperature-view {\n  width: 100%;\n}\n\ndiv.hourly-temperature-view-container {\n  display: flex;\n  justify-content: center;\n  margin: 2em;\n  margin-right: 5em;\n  border-radius: 20px;\n}\n\ninput#location-input {\n  width: 80%;\n}\n\ntable {\n  background-color: rgba(12, 12, 12, 0.9);\n  color: white;\n  border: none;\n}\n\ntable td {\n  outline: 1px solid rgb(27, 27, 27);\n  text-align: center;\n  vertical-align: middle;\n}\n\ndiv#cards {\n  grid-column: 1 / 3;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 50px;\n  padding: 20px;\n}\n\np {\n  font-size: 15px;\n}\n\nbutton#switch-degree-measurement-button {\n  display: flex;\n  align-items: center;\n  color: black;\n  background-color: rgb(245, 245, 245);\n  font-size: 20px;\n  letter-spacing: 2px;\n  border: none;\n  border-radius: 25px;\n  padding: 30px;\n  margin-right: 3vw;\n  text-align: center;\n  outline: none;\n}\n\ndiv.card-container {\n  display: flex;\n  padding: 50px;\n  padding-top: 3em;\n  padding-bottom: 4em;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  background-color: #131313;\n  color: white;\n  border-radius: 10px;\n  backdrop-filter: blur(10px);\n}\n\ndiv.card-container h3 {\n  padding-bottom: 30px;\n  font-size: 25px;\n}\n\ndiv.card-container p {\n  font-size: 15px;\n}\n\nul.day-weather-info-list {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-rows: repeat(4, 1fr);\n  gap: 10px;\n}\n\nul.day-weather-info-list li {\n  display: flex;\n  justify-content: center;\n  gap: 50px;\n}\n\ndiv.day-weather-data-card {\n  width: 100%;\n}\n\nul.day-weather-info-list li.weather-data {\n  display: flex;\n  justify-content: start;\n}\n\nul.day-weather-info-list li.weather-value {\n  display: flex;\n  justify-content: end;\n}\n\n.weather-card-header {\n  display: flex;\n  justify-content: space-between;\n  padding-bottom: 10px;\n}\n\nfooter {\n  height: 100%;\n  background-color: #0b0000;\n  font-size: 20px;\n  padding: 50px;\n  color: white;\n  display: flex;\n  margin-top: 100px;\n  font-family: \"Roboto Mono\", monospace;\n  gap: 50px;\n}\n\ndiv#hr {\n  width: 1px;\n  background-color: white;\n  height: 200px;\n  margin-right: 5vw;\n  margin-left: 4vw;\n}\n\np#my-ref {\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n}\n\ndiv.footer-main-container {\n  display: flex;\n  align-items: center;\n}\n\nfooter ol {\n  display: flex;\n  flex-direction: column;\n  gap: 15px;\n}\n\nimg#github-icon {\n  margin-left: 1em;\n  width: 50px;\n}\n\na {\n  color: white;\n  text-decoration: none;\n}\n\ninput[type=\"text\"] {\n  border: none;\n  padding: 20px;\n  padding-left: 2em;\n  background-color: #eeeeee;\n  border-radius: 5px;\n  font-size: 15px;\n}\n\ninput[type=\"text\"]:focus {\n  outline: none;\n  color: black;\n  border: 1px solid rgb(197, 197, 197);\n}\n\nbutton#switch-degree-measurement-button.fahrenheit {\n  color: white;\n  background-color: #1f1f1f;\n}\n\n@media screen and (max-width: 950px) {\n  div#grid-wrapper {\n    grid-template-columns: 1fr;\n    grid-template-rows: repeat(5, auto);\n  }\n\n  div.location-temp-container {\n    grid-column: 1 / 2;\n  }\n\n  div.hourly-temperature-view-container {\n    grid-column: 1 / 2;\n  }\n\n  footer {\n    box-sizing: border-box;\n    flex-direction: column;\n  }\n\n  div#hr {\n    width: 69vw;\n    height: 1px;\n    align-items: center;\n  }\n\n  div#cards {\n    grid-column: 1 / 2;\n  }\n\n  button#switch-degree-measurement-button {\n    font-size: 15px;\n  }\n\n  div.hourly-temperature-view-container {\n    margin-right: 0em;\n  }\n\n  table#weather-overview-table,\n  div.hourly-temperature-view-container {\n    height: 350px;\n  }\n\n  div#local-weather-data {\n    height: 4em;\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import url(\"https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap\");\n@import url(\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap\");\n\n/* http://meyerweb.com/eric/tools/css/reset/ \n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\";\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n:root {\n  font-family: \"Lato\", sans-serif;\n}\n\nbody {\n  display: flex;\n  flex-direction: column;\n  width: 100vw;\n  min-height: 100vh;\n}\n\nfooter {\n  width: 100vw;\n  flex: 0 0 auto;\n}\n\ndiv.main {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  flex: 1 0 auto;\n  background-image: url(../assets/mesh-gradient.png);\n  background-size: cover;\n}\n\nh2,\nh3 {\n  font-weight: bold;\n}\n\ndiv#grid-wrapper {\n  gap: 110px;\n}\n\ndiv#grid-wrapper {\n  display: grid;\n  padding: 25px;\n  grid-template-columns: 1fr 2fr;\n  grid-template-rows: 10vh repeat(2, 1fr);\n}\n\ndiv#local-weather-data {\n  grid-column: 1 / 2;\n  display: flex;\n  justify-content: space-between;\n\n  padding: 15px;\n  padding-left: 50px;\n  padding-right: 50px;\n  color: white;\n  font-weight: 400;\n\n  border-radius: 20px;\n  border: 0px solid #fff;\n  background: rgb(12, 12, 12);\n  backdrop-filter: blur(9.8999996 18530273px);\n}\n\ndiv#local-weather-data > *,\ndiv#local-weather-data p {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 20px;\n}\n\ntable#weather-overview-table {\n  border: 0px solid #fff;\n  backdrop-filter: blur(9.899999618530273px);\n  padding: 50px;\n  grid-column: 1 / span 1;\n  margin: 2em;\n}\n\ntable#weather-overview-table tr :nth-child(1) {\n  border: none;\n}\n\ndiv#vertical-container {\n  display: flex;\n  flex-direction: column;\n}\n\ndiv.location-temp-container {\n  box-sizing: content-box;\n  display: flex;\n  justify-content: center;\n  margin-top: 0.5em;\n  gap: 50px;\n  grid-row: 1 / 2;\n  grid-column: 2 / 3;\n  width: 100%;\n  height: 51px;\n  flex-shrink: 0;\n  padding: 10px;\n}\n\ntable#hourly-temperature-view {\n  width: 100%;\n}\n\ndiv.hourly-temperature-view-container {\n  display: flex;\n  justify-content: center;\n  margin: 2em;\n  margin-right: 5em;\n  border-radius: 20px;\n}\n\ninput#location-input {\n  width: 80%;\n}\n\ntable {\n  background-color: rgba(12, 12, 12, 1);\n  color: white;\n  border: none;\n  -webkit-backdrop-filter: blur(10px);\n}\n\ntable td {\n  outline: 1px solid rgb(27, 27, 27, 0.5);\n  text-align: center;\n  vertical-align: middle;\n}\n\ndiv#cards {\n  grid-column: 1 / 3;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 50px;\n  padding: 20px;\n}\n\np {\n  font-size: 15px;\n}\n\nbutton#switch-degree-measurement-button {\n  display: flex;\n  align-items: center;\n  color: black;\n  background-color: rgba(245, 245, 245);\n  font-size: 20px;\n  letter-spacing: 2px;\n  border: none;\n  border-radius: 25px;\n  padding: 30px;\n  margin-right: 3vw;\n  text-align: center;\n  outline: none;\n}\n\ndiv.card-container {\n  display: flex;\n  padding: 50px;\n  padding-top: 3em;\n  padding-bottom: 4em;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  background-color: rgba(19, 19, 19, 1);\n  backdrop-filter: blur(10px);\n  color: white;\n  border-radius: 10px;\n}\n\ndiv.card-container h3 {\n  padding-bottom: 30px;\n  font-size: 25px;\n}\n\ndiv.card-container p {\n  display: flex;\n  font-size: 20px;\n  align-items: center;\n}\n\nul.day-weather-info-list {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-rows: repeat(4, 1fr);\n  gap: 20px;\n  padding-top: 15px;\n}\n\nul.day-weather-info-list li {\n  display: flex;\n  justify-content: center;\n  gap: 50px;\n}\n\ndiv.day-weather-data-card {\n  width: 100%;\n}\n\nul.day-weather-info-list li.weather-data {\n  display: flex;\n  justify-content: start;\n}\n\nul.day-weather-info-list li.weather-value {\n  display: flex;\n  justify-content: end;\n}\n\n.weather-card-header {\n  display: flex;\n  justify-content: space-between;\n  padding-bottom: 10px;\n}\n\nfooter {\n  height: 100%;\n  background-color: #0b0000;\n  font-size: 20px;\n  padding: 50px;\n  color: white;\n  display: flex;\n  margin-top: 100px;\n  font-family: \"Roboto Mono\", monospace;\n  gap: 50px;\n}\n\ndiv#hr {\n  width: 1px;\n  background-color: white;\n  height: 200px;\n  margin-right: 5vw;\n  margin-left: 4vw;\n}\n\np#my-ref {\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n}\n\ndiv.footer-main-container {\n  display: flex;\n  align-items: center;\n}\n\nfooter ol {\n  display: flex;\n  flex-direction: column;\n  gap: 15px;\n}\n\nimg#github-icon {\n  margin-left: 1em;\n  width: 50px;\n}\n\na {\n  color: white;\n  text-decoration: none;\n}\n\ninput[type=\"text\"] {\n  border: none;\n  padding: 20px;\n  padding-left: 2em;\n  background-color: rgba(255, 255, 255, 0.8);\n  border-radius: 5px;\n  font-size: 20px;\n  font-weight: 500;\n}\n\ninput[type=\"text\"]:focus {\n  outline: none;\n  color: black;\n  border: 1px solid rgb(197, 197, 197);\n}\n\nbutton#switch-degree-measurement-button.fahrenheit {\n  color: white;\n  background-color: #1f1f1f;\n}\n\nimg {\n  fill: color;\n  display: flex;\n  height: 40px;\n}\n\n@media screen and (max-width: 950px) {\n  div#grid-wrapper {\n    grid-template-columns: 1fr;\n    grid-template-rows: repeat(5, auto);\n  }\n\n  div.location-temp-container {\n    grid-column: 1 / 2;\n  }\n\n  div.hourly-temperature-view-container {\n    grid-column: 1 / 2;\n  }\n\n  footer {\n    box-sizing: border-box;\n    flex-direction: column;\n  }\n\n  div#hr {\n    width: 69vw;\n    height: 1px;\n    align-items: center;\n  }\n\n  div#cards {\n    grid-column: 1 / 2;\n  }\n\n  button#switch-degree-measurement-button {\n    font-size: 15px;\n  }\n\n  div.hourly-temperature-view-container {\n    margin-right: 0em;\n  }\n\n  table#weather-overview-table,\n  div.hourly-temperature-view-container {\n    height: 350px;\n  }\n\n  div#local-weather-data {\n    height: 4em;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -998,7 +1008,7 @@ module.exports = __webpack_require__.p + "7e5e159937798fad8e5b.png";
   \*************************/
 /***/ ((module) => {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEyNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGQ9Ik00OS4zMiw2Ny41YzEwLjAyLDAsMTguMTgtOC4xNSwxOC4xOC0xOC4xN2MwLTcuMzEtNC4zNS0xMy44OC0xMS4wNy0xNi43NGMtMC40My0wLjE4LTAuOTItMC4wOC0xLjI0LDAuMjQgICBjLTAuMzMsMC4zMy0wLjQyLDAuODItMC4yNCwxLjI1YzAuODQsMS45NywxLjI2LDQuMDYsMS4yNiw2LjIxYzAsOC43Ny03LjE0LDE1LjkxLTE1LjkxLDE1LjkxYy0yLjE1LDAtNC4yNS0wLjQyLTYuMjEtMS4yNiAgIGMtMC40My0wLjE4LTAuOTItMC4wOC0xLjI1LDAuMjRjLTAuMzMsMC4zMy0wLjQyLDAuODItMC4yNCwxLjI0QzM1LjQ1LDYzLjE1LDQyLjAyLDY3LjUsNDkuMzIsNjcuNXogTTQwLjI5LDU4LjQ3ICAgYzEwLjAyLDAsMTguMTgtOC4xNSwxOC4xOC0xOC4xOGMwLTEuNDgtMC4xNy0yLjkzLTAuNTItNC4zNGM0LjUsMi45LDcuMjksNy45LDcuMjksMTMuMzdjMCw4Ljc3LTcuMTQsMTUuOTEtMTUuOTEsMTUuOTEgICBjLTUuNDgsMC0xMC40OC0yLjc5LTEzLjM3LTcuMjlDMzcuMzYsNTguMjksMzguODEsNTguNDcsNDAuMjksNTguNDd6Ii8+PC9nPjx0ZXh0IHg9IjAiIHk9IjExNSIgZmlsbD0iIzAwMDAwMCIgZm9udC1zaXplPSI1cHgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LWZhbWlseT0iJ0hlbHZldGljYSBOZXVlJywgSGVsdmV0aWNhLCBBcmlhbC1Vbmljb2RlLCBBcmlhbCwgU2Fucy1zZXJpZiI+Q3JlYXRlZCBieSBjcmVhdGl2ZV92aXNpb25hcnk8L3RleHQ+PHRleHQgeD0iMCIgeT0iMTIwIiBmaWxsPSIjMDAwMDAwIiBmb250LXNpemU9IjVweCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtZmFtaWx5PSInSGVsdmV0aWNhIE5ldWUnLCBIZWx2ZXRpY2EsIEFyaWFsLVVuaWNvZGUsIEFyaWFsLCBTYW5zLXNlcmlmIj5mcm9tIHRoZSBOb3VuIFByb2plY3Q8L3RleHQ+PC9zdmc+";
+module.exports = "data:image/svg+xml;base64,PHN2ZyAgZmlsbD0iI2ZmZiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNNTI0LTQwcS04NCAwLTE1Ny41LTMydC0xMjgtODYuNVExODQtMjEzIDE1Mi0yODYuNVQxMjAtNDQ0cTAtMTQ2IDkzLTI1Ny41VDQ1MC04NDBxLTE4IDk5IDExIDE5My41VDU2MS00ODFxNzEgNzEgMTY1LjUgMTAwVDkyMC0zNzBxLTI2IDE0NC0xMzggMjM3VDUyNC00MFptMC04MHE4OCAwIDE2My00NHQxMTgtMTIxcS04Ni04LTE2My00My41VDUwNC00MjVxLTYxLTYxLTk3LTEzOHQtNDMtMTYzcS03NyA0My0xMjAuNSAxMTguNVQyMDAtNDQ0cTAgMTM1IDk0LjUgMjI5LjVUNTI0LTEyMFptLTIwLTMwNVoiLz48L3N2Zz4=";
 
 /***/ }),
 
@@ -1008,7 +1018,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
   \**********************************/
 /***/ ((module) => {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAwIDM3NSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzAwIDMwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxnPjxwYXRoIGQ9Ik0yMDIuMywxNDAuOGMwLDMxLjMtMjUuNCw1Ni44LTU2LjgsNTYuOHMtNTYuOC0yNS40LTU2LjgtNTYuOHM1Ni44LTEyNC4zLDU2LjgtMTI0LjNTMjAyLjMsMTA5LjQsMjAyLjMsMTQwLjh6Ii8+PC9nPjxnPjxwYXRoIGQ9Ik0yNjcuMSwyNDEuM2MwLDE3LjItMTMuOSwzMS4yLTMxLjIsMzEuMnMtMzEuMi0xMy45LTMxLjItMzEuMnMzMS4yLTY4LjIsMzEuMi02OC4yUzI2Ny4xLDIyNC4xLDI2Ny4xLDI0MS4zeiIvPjwvZz48Zz48cGF0aCBkPSJNODMsMjM1LjVjMCwxMS40LTkuMiwyMC42LTIwLjYsMjAuNnMtMjAuNi05LjItMjAuNi0yMC42YzAtMTEuNCwyMC42LTQ1LDIwLjYtNDVTODMsMjI0LjEsODMsMjM1LjV6Ii8+PC9nPjwvZz48dGV4dCB4PSIwIiB5PSIzMTUiIGZpbGw9IiMwMDAwMDAiIGZvbnQtc2l6ZT0iNXB4IiBmb250LXdlaWdodD0iYm9sZCIgZm9udC1mYW1pbHk9IidIZWx2ZXRpY2EgTmV1ZScsIEhlbHZldGljYSwgQXJpYWwtVW5pY29kZSwgQXJpYWwsIFNhbnMtc2VyaWYiPkNyZWF0ZWQgYnkgQW5nZWxvIFRyb2lhbm88L3RleHQ+PHRleHQgeD0iMCIgeT0iMzIwIiBmaWxsPSIjMDAwMDAwIiBmb250LXNpemU9IjVweCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtZmFtaWx5PSInSGVsdmV0aWNhIE5ldWUnLCBIZWx2ZXRpY2EsIEFyaWFsLVVuaWNvZGUsIEFyaWFsLCBTYW5zLXNlcmlmIj5mcm9tIHRoZSBOb3VuIFByb2plY3Q8L3RleHQ+PC9zdmc+";
+module.exports = "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGQ9Ik0xOTgtNDg0cS0xNSA4LTMwLjUgMi41VDE0NC01MDJMNDQtNzAycS04LTE1LTIuNS0zMC41VDYyLTc1NnExNS04IDMwLjUtMi41VDExNi03MzhsMTAwIDIwMHE4IDE1IDIuNSAzMC41VDE5OC00ODRabTE0MCAyODBxLTE1IDgtMzAuNSAyLjVUMjg0LTIyMmwtODAtMTYwcS04LTE1LTIuNS0zMC41VDIyMi00MzZxMTUtOCAzMC41LTIuNVQyNzYtNDE4bDgwIDE2MHE4IDE1IDIuNSAzMC41VDMzOC0yMDRabTgyLTIwMHEtMTUgOC0zMC41IDIuNVQzNjYtNDIyTDIyNi03MDJxLTgtMTUtMi41LTMwLjVUMjQ0LTc1NnExNS04IDMwLjUtMi41VDI5OC03MzhsMTQwIDI4MHE4IDE1IDIuNSAzMC41VDQyMC00MDRabTg2LTIwMHEtMTUgOC0zMC41IDIuNVQ0NTItNjIybC0zOS04MHEtOC0xNS0yLjUtMzAuNVQ0MzEtNzU2cTE1LTggMzAtMi41dDIzIDIwLjVsNDAgODBxOCAxNSAyLjUgMzAuNVQ1MDYtNjA0Wm0yNCAzOTlxLTE1IDgtMzAuNSAzVDQ3Ni0yMjJsLTQwLTgwcS04LTE1LTIuNS0zMC41VDQ1NC0zNTZxMTUtOCAzMC41LTIuNVQ1MDgtMzM4bDQwIDgwcTggMTUgMi41IDMwVDUzMC0yMDVabTE4NiAwcS0xNSA4LTMwLjUgM1Q2NjItMjIyTDUyMi01MDJxLTgtMTUtMi41LTMwLjVUNTQwLTU1NnExNS04IDMwLjUtMi41VDU5NC01MzhsMTQwIDI4MHE4IDE1IDIuNSAzMFQ3MTYtMjA1Wm02Mi0yMzlxLTE1IDgtMzAuNSAyLjVUNzI0LTQ2Mkw2MDQtNzAycS04LTE1LTIuNS0zMC41VDYyMi03NTZxMTUtOCAzMC41LTIuNVQ2NzYtNzM4bDEyMCAyNDBxOCAxNSAyLjUgMzAuNVQ3NzgtNDQ0Wm0xMjAgMjQwcS0xNSA4LTMwLjUgMi41VDg0NC0yMjJsLTYwLTEyMHEtOC0xNS0yLjUtMzAuNVQ4MDItMzk2cTE1LTggMzAuNS0yLjVUODU2LTM3OGw2MCAxMjBxOCAxNSAyLjUgMzAuNVQ4OTgtMjA0WiIvPjwvc3ZnPg==";
 
 /***/ }),
 
@@ -1018,7 +1028,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
   \************************/
 /***/ ((module) => {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxuczp4PSJodHRwOi8vbnMuYWRvYmUuY29tL0V4dGVuc2liaWxpdHkvMS4wLyIgeG1sbnM6aT0iaHR0cDovL25zLmFkb2JlLmNvbS9BZG9iZUlsbHVzdHJhdG9yLzEwLjAvIiB4bWxuczpncmFwaD0iaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCAxMjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEwMCAxMDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHJlcXVpcmVkRXh0ZW5zaW9ucz0iaHR0cDovL25zLmFkb2JlLmNvbS9BZG9iZUlsbHVzdHJhdG9yLzEwLjAvIiB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIi8+PGcgaTpleHRyYW5lb3VzPSJzZWxmIj48Zz48cGF0aCBkPSJNNTAsMjguMWMtMTIuMSwwLTIxLjksOS44LTIxLjksMjEuOVMzNy45LDcxLjksNTAsNzEuOVM3MS45LDYyLjEsNzEuOSw1MFM2Mi4xLDI4LjEsNTAsMjguMXoiLz48cGF0aCBkPSJNNDYuOSwyMC41aDYuM2MwLjgsMCwxLjUtMC43LDEuNS0xLjVWNGMwLTAuOC0wLjctMS41LTEuNS0xLjVoLTYuM2MtMC44LDAtMS41LDAuNy0xLjUsMS41djE1LjEgICAgIEM0NS40LDE5LjksNDYuMSwyMC41LDQ2LjksMjAuNXoiLz48cGF0aCBkPSJNMjQuOSwzMS40YzAuNiwwLjYsMS41LDAuNiwyLjEsMGw0LjQtNC40YzAuNi0wLjYsMC42LTEuNSwwLTIuMUwyMC43LDE0LjJjLTAuNi0wLjYtMS41LTAuNi0yLjEsMGwtNC40LDQuNCAgICAgYy0wLjYsMC42LTAuNiwxLjUsMCwyLjFMMjQuOSwzMS40eiIvPjxwYXRoIGQ9Ik0yMC41LDUzLjF2LTYuM2MwLTAuOC0wLjctMS41LTEuNS0xLjVINGMtMC44LDAtMS41LDAuNy0xLjUsMS41djYuM2MwLDAuOCwwLjcsMS41LDEuNSwxLjVoMTUuMSAgICAgQzE5LjksNTQuNiwyMC41LDUzLjksMjAuNSw1My4xeiIvPjxwYXRoIGQ9Ik0yNyw2OC42Yy0wLjYtMC42LTEuNS0wLjYtMi4xLDBMMTQuMiw3OS4zYy0wLjYsMC42LTAuNiwxLjUsMCwyLjFsNC40LDQuNGMwLjYsMC42LDEuNSwwLjYsMi4xLDBsMTAuNy0xMC43ICAgICBjMC42LTAuNiwwLjYtMS41LDAtMi4xTDI3LDY4LjZ6Ii8+PHBhdGggZD0iTTUzLjEsNzkuNWgtNi4zYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVWOTZjMCwwLjgsMC43LDEuNSwxLjUsMS41aDYuM2MwLjgsMCwxLjUtMC43LDEuNS0xLjVWODAuOSAgICAgQzU0LjYsODAuMSw1My45LDc5LjUsNTMuMSw3OS41eiIvPjxwYXRoIGQ9Ik03NS4xLDY4LjZjLTAuNi0wLjYtMS41LTAuNi0yLjEsMEw2OC42LDczYy0wLjYsMC42LTAuNiwxLjUsMCwyLjFsMTAuNywxMC43YzAuNiwwLjYsMS41LDAuNiwyLjEsMGw0LjQtNC40ICAgICBjMC42LTAuNiwwLjYtMS41LDAtMi4xTDc1LjEsNjguNnoiLz48cGF0aCBkPSJNOTYsNDUuNEg4MC45Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjV2Ni4zYzAsMC44LDAuNywxLjUsMS41LDEuNUg5NmMwLjgsMCwxLjUtMC43LDEuNS0xLjV2LTYuMyAgICAgQzk3LjUsNDYuMSw5Ni44LDQ1LjQsOTYsNDUuNHoiLz48cGF0aCBkPSJNNzMsMzEuNGMwLjYsMC42LDEuNSwwLjYsMi4xLDBsMTAuNy0xMC43YzAuNi0wLjYsMC42LTEuNSwwLTIuMWwtNC40LTQuNGMtMC42LTAuNi0xLjUtMC42LTIuMSwwTDY4LjYsMjQuOSAgICAgYy0wLjYsMC42LTAuNiwxLjUsMCwyLjFMNzMsMzEuNHoiLz48L2c+PC9nPjwvc3dpdGNoPjx0ZXh0IHg9IjAiIHk9IjExNSIgZmlsbD0iIzAwMDAwMCIgZm9udC1zaXplPSI1cHgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LWZhbWlseT0iJ0hlbHZldGljYSBOZXVlJywgSGVsdmV0aWNhLCBBcmlhbC1Vbmljb2RlLCBBcmlhbCwgU2Fucy1zZXJpZiI+Q3JlYXRlZCBieSBBbGljZSBEZXNpZ248L3RleHQ+PHRleHQgeD0iMCIgeT0iMTIwIiBmaWxsPSIjMDAwMDAwIiBmb250LXNpemU9IjVweCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtZmFtaWx5PSInSGVsdmV0aWNhIE5ldWUnLCBIZWx2ZXRpY2EsIEFyaWFsLVVuaWNvZGUsIEFyaWFsLCBTYW5zLXNlcmlmIj5mcm9tIHRoZSBOb3VuIFByb2plY3Q8L3RleHQ+PC9zdmc+";
+module.exports = "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGQ9Ik00NDAtNzYwdi0xNjBoODB2MTYwaC04MFptMjY2IDExMC01NS01NSAxMTItMTE1IDU2IDU3LTExMyAxMTNabTU0IDIxMHYtODBoMTYwdjgwSDc2MFpNNDQwLTQwdi0xNjBoODB2MTYwaC04MFpNMjU0LTY1MiAxNDAtNzYzbDU3LTU2IDExMyAxMTMtNTYgNTRabTUwOCA1MTJMNjUxLTI1NWw1NC01NCAxMTQgMTEwLTU3IDU5Wk00MC00NDB2LTgwaDE2MHY4MEg0MFptMTU3IDMwMC01Ni01NyAxMTItMTEyIDI5IDI3IDI5IDI4LTExNCAxMTRabTI4My0xMDBxLTEwMCAwLTE3MC03MHQtNzAtMTcwcTAtMTAwIDcwLTE3MHQxNzAtNzBxMTAwIDAgMTcwIDcwdDcwIDE3MHEwIDEwMC03MCAxNzB0LTE3MCA3MFptMC04MHE2NiAwIDExMy00N3Q0Ny0xMTNxMC02Ni00Ny0xMTN0LTExMy00N3EtNjYgMC0xMTMgNDd0LTQ3IDExM3EwIDY2IDQ3IDExM3QxMTMgNDdabTAtMTYwWiIvPjwvc3ZnPg==";
 
 /***/ }),
 
@@ -1028,7 +1038,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxuczp4PSJodHRwOi8vbnMuYWRv
   \*************************/
 /***/ ((module) => {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxuczp4PSJodHRwOi8vbnMuYWRvYmUuY29tL0V4dGVuc2liaWxpdHkvMS4wLyIgeG1sbnM6aT0iaHR0cDovL25zLmFkb2JlLmNvbS9BZG9iZUlsbHVzdHJhdG9yLzEwLjAvIiB4bWxuczpncmFwaD0iaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iLTk0OSA5NTEgMTAwIDEyNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAtOTQ5IDk1MSAxMDAgMTAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCByZXF1aXJlZEV4dGVuc2lvbnM9Imh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVJbGx1c3RyYXRvci8xMC4wLyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIvPjxnIGk6ZXh0cmFuZW91cz0ic2VsZiI+PGc+PHBhdGggZD0iTS04NTEuNSw5ODljMC04LjYtNy0xNS42LTE1LjYtMTUuNmMtOC42LDAtMTUuNiw3LTE1LjYsMTUuNmMwLDIuMSwxLjcsMy44LDMuOCwzLjhzMy44LTEuNywzLjgtMy44YzAtNC40LDMuNi04LDgtOCAgICAgczgsMy42LDgsOGMwLDQuNC0zLjYsOC04LDhoLTc1LjZjLTIuMSwwLTMuOCwxLjctMy44LDMuOGMwLDIuMSwxLjcsMy44LDMuOCwzLjhoNjMuMmM0LjQsMCw4LDMuNiw4LDhjMCw0LjQtMy42LDgtOCw4ICAgICBzLTgtMy42LTgtOGMwLTIuMS0xLjctMy44LTMuOC0zLjhjLTIuMSwwLTMuOCwxLjctMy44LDMuOGMwLDguNiw3LDE1LjYsMTUuNiwxNS42YzguNiwwLDE1LjYtNywxNS42LTE1LjZjMC0zLTAuOC01LjctMi4zLTguMSAgICAgQy04NTgsMTAwNC4xLTg1MS41LDk5Ny4zLTg1MS41LDk4OXoiLz48cGF0aCBkPSJNLTkxMy4yLDEwMTAuNGgtMjkuNWMtMi4xLDAtMy44LDEuNy0zLjgsMy44YzAsMi4xLDEuNywzLjgsMy44LDMuOGgyOS41YzQsMCw3LjIsMy4yLDcuMiw3LjJzLTMuMiw3LjItNy4yLDcuMiAgICAgYy00LDAtNy4yLTMuMi03LjItNy4yYzAtMi4xLTEuNy0zLjgtMy44LTMuOGMtMi4xLDAtMy44LDEuNy0zLjgsMy44YzAsOC4xLDYuNiwxNC44LDE0LjgsMTQuOGM4LjEsMCwxNC44LTYuNiwxNC44LTE0LjggICAgIFMtOTA1LjEsMTAxMC40LTkxMy4yLDEwMTAuNHoiLz48cGF0aCBkPSJNLTk0Mi43LDk5MS4zaDQxLjljOC4xLDAsMTQuNi02LjYsMTQuNi0xNC42YzAtOC4xLTYuNi0xNC42LTE0LjYtMTQuNmMtOC4xLDAtMTQuNiw2LjYtMTQuNiwxNC42YzAsMi4xLDEuNywzLjgsMy44LDMuOCAgICAgYzIuMSwwLDMuOC0xLjcsMy44LTMuOGMwLTMuOSwzLjItNyw3LTdjMy45LDAsNywzLjIsNyw3YzAsMy45LTMuMiw3LTcsN2gtNDEuOWMtMi4xLDAtMy44LDEuNy0zLjgsMy44ICAgICBDLTk0Ni41LDk4OS42LTk0NC44LDk5MS4zLTk0Mi43LDk5MS4zeiIvPjwvZz48L2c+PC9zd2l0Y2g+PHRleHQgeD0iLTk0OSIgeT0iMTA2NiIgZmlsbD0iIzAwMDAwMCIgZm9udC1zaXplPSI1cHgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LWZhbWlseT0iJ0hlbHZldGljYSBOZXVlJywgSGVsdmV0aWNhLCBBcmlhbC1Vbmljb2RlLCBBcmlhbCwgU2Fucy1zZXJpZiI+Q3JlYXRlZCBieSBBZHJpZW4gQ29xdWV0PC90ZXh0Pjx0ZXh0IHg9Ii05NDkiIHk9IjEwNzEiIGZpbGw9IiMwMDAwMDAiIGZvbnQtc2l6ZT0iNXB4IiBmb250LXdlaWdodD0iYm9sZCIgZm9udC1mYW1pbHk9IidIZWx2ZXRpY2EgTmV1ZScsIEhlbHZldGljYSwgQXJpYWwtVW5pY29kZSwgQXJpYWwsIFNhbnMtc2VyaWYiPmZyb20gdGhlIE5vdW4gUHJvamVjdDwvdGV4dD48L3N2Zz4=";
+module.exports = "data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGQ9Ik00NjAtMTYwcS01MCAwLTg1LTM1dC0zNS04NWg4MHEwIDE3IDExLjUgMjguNVQ0NjAtMjQwcTE3IDAgMjguNS0xMS41VDUwMC0yODBxMC0xNy0xMS41LTI4LjVUNDYwLTMyMEg4MHYtODBoMzgwcTUwIDAgODUgMzV0MzUgODVxMCA1MC0zNSA4NXQtODUgMzVaTTgwLTU2MHYtODBoNTQwcTI2IDAgNDMtMTd0MTctNDNxMC0yNi0xNy00M3QtNDMtMTdxLTI2IDAtNDMgMTd0LTE3IDQzaC04MHEwLTU5IDQwLjUtOTkuNVQ2MjAtODQwcTU5IDAgOTkuNSA0MC41VDc2MC03MDBxMCA1OS00MC41IDk5LjVUNjIwLTU2MEg4MFptNjYwIDMyMHYtODBxMjYgMCA0My0xN3QxNy00M3EwLTI2LTE3LTQzdC00My0xN0g4MHYtODBoNjYwcTU5IDAgOTkuNSA0MC41VDg4MC0zODBxMCA1OS00MC41IDk5LjVUNzQwLTI0MFoiLz48L3N2Zz4=";
 
 /***/ }),
 
@@ -2226,6 +2236,19 @@ function refreshWeatherCards(weatherData) {
     THIDR_DAY_UV.textContent = _ref5[14];
   }
 }
+function loadForecastIcons(result) {
+  var _ref6 = [document.getElementById("current-weather-icon"), document.getElementById("current-weather-card-icon"), document.getElementById("second-day-forecast-icon"), document.getElementById("third-day-forecast-icon")],
+    FIRST_DAY_HEADING_FORECAST_ICON = _ref6[0],
+    FIRST_DAY_CARD_FORECAST_ICON = _ref6[1],
+    SECOND_DAY_FORECAST_ICON = _ref6[2],
+    THIRD_DAY_FORECAST_ICON = _ref6[3];
+  var _ref7 = ["".concat(result["current"]["condition"]["icon"]), "".concat(result["current"]["condition"]["icon"]), "".concat(result["forecast"]["forecastday"]["1"]["day"]["condition"]["icon"]), "".concat(result["forecast"]["forecastday"]["2"]["day"]["condition"]["icon"]),,];
+  FIRST_DAY_HEADING_FORECAST_ICON.src = _ref7[0];
+  FIRST_DAY_CARD_FORECAST_ICON.src = _ref7[1];
+  SECOND_DAY_FORECAST_ICON.src = _ref7[2];
+  THIRD_DAY_FORECAST_ICON.src = _ref7[3];
+  console.log("".concat(result["current"]["condition"]["icon"]));
+}
 function refreshPage(weatherData, result) {
   var nextSixHoursArray = getNextSixHoursInDisplayForm();
   var tempeartureObject = getTodayTempObject(weatherData);
@@ -2246,21 +2269,21 @@ function refreshPage(weatherData, result) {
   var THIRD_HOUR_TEMP = document.getElementById("3rd-hour-temp");
   var FOURTH_HOUR_TEMP = document.getElementById("4th-hour-temp");
   var FIFTH_HOUR_TEMP = document.getElementById("5th-hour-temp");
-  var _ref6 = ["".concat(tempeartureObject[tempUnits][0], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][1], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][2], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][3], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][4], "\xB0").concat(tempUnitsymbol)];
-  FIRST_HOUR_TEMP.textContent = _ref6[0];
-  SECOND_HOUR_TEMP.textContent = _ref6[1];
-  THIRD_HOUR_TEMP.textContent = _ref6[2];
-  FOURTH_HOUR_TEMP.textContent = _ref6[3];
-  FIFTH_HOUR_TEMP.textContent = _ref6[4];
-  var _ref7 = [document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-precipitation"), document.getElementById("today-wind"), document.getElementById("today-uv"), document.getElementById("local-location"), document.getElementById("local-time"), document.getElementById("header-temp")],
-    DAY_TEMP = _ref7[0],
-    NIGHT_TEMP = _ref7[1],
-    PERCEPITATION_TODAY = _ref7[2],
-    WIND_TODAY = _ref7[3],
-    UVINDEX_TODAY = _ref7[4],
-    USER_LOCATION = _ref7[5],
-    LOCAL_TIME = _ref7[6],
-    HEADER_TEMP = _ref7[7];
+  var _ref8 = ["".concat(tempeartureObject[tempUnits][0], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][1], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][2], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][3], "\xB0").concat(tempUnitsymbol), "".concat(tempeartureObject[tempUnits][4], "\xB0").concat(tempUnitsymbol)];
+  FIRST_HOUR_TEMP.textContent = _ref8[0];
+  SECOND_HOUR_TEMP.textContent = _ref8[1];
+  THIRD_HOUR_TEMP.textContent = _ref8[2];
+  FOURTH_HOUR_TEMP.textContent = _ref8[3];
+  FIFTH_HOUR_TEMP.textContent = _ref8[4];
+  var _ref9 = [document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-precipitation"), document.getElementById("today-wind"), document.getElementById("today-uv"), document.getElementById("local-location"), document.getElementById("local-time"), document.getElementById("header-temp")],
+    DAY_TEMP = _ref9[0],
+    NIGHT_TEMP = _ref9[1],
+    PERCEPITATION_TODAY = _ref9[2],
+    WIND_TODAY = _ref9[3],
+    UVINDEX_TODAY = _ref9[4],
+    USER_LOCATION = _ref9[5],
+    LOCAL_TIME = _ref9[6],
+    HEADER_TEMP = _ref9[7];
   var minutes;
   var hours = new Date(Date.parse(locationCurrentTime)).getHours();
   if (new Date(Date.parse(locationCurrentTime)).getMinutes() < 10) {
@@ -2270,32 +2293,33 @@ function refreshPage(weatherData, result) {
   }
   var localTime = "".concat(hours, ":").concat(minutes);
   if (tempUnits === "celsius") {
-    var _ref8 = ["".concat(weatherData["currentWeather"]["temperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C")];
-    DAY_TEMP.textContent = _ref8[0];
-    NIGHT_TEMP.textContent = _ref8[1];
-    HEADER_TEMP.textContent = _ref8[2];
+    var _ref10 = ["".concat(weatherData["currentWeather"]["temperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(weatherData["currentWeather"]["nightTemperatureC"], "\xB0C")];
+    DAY_TEMP.textContent = _ref10[0];
+    NIGHT_TEMP.textContent = _ref10[1];
+    HEADER_TEMP.textContent = _ref10[2];
   } else {
-    var _ref9 = ["".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F")];
-    DAY_TEMP.textContent = _ref9[0];
-    NIGHT_TEMP.textContent = _ref9[1];
-    HEADER_TEMP.textContent = _ref9[2];
+    var _ref11 = ["".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(weatherData["currentWeather"]["temperatureF"], "\xB0F")];
+    DAY_TEMP.textContent = _ref11[0];
+    NIGHT_TEMP.textContent = _ref11[1];
+    HEADER_TEMP.textContent = _ref11[2];
   }
-  var _ref10 = ["".concat(result["location"]["name"], ", ").concat(result["location"]["country"]), "".concat(localTime)];
-  USER_LOCATION.textContent = _ref10[0];
-  LOCAL_TIME.textContent = _ref10[1];
-  var _ref11 = ["".concat(weatherData["currentWeather"]["precipitation"], "mm"), "".concat(weatherData["currentWeather"]["windspeedKMH"], "km/h"), weatherData["currentWeather"]["UV"]];
-  PERCEPITATION_TODAY.textContent = _ref11[0];
-  WIND_TODAY.textContent = _ref11[1];
-  UVINDEX_TODAY.textContent = _ref11[2];
-  var _ref12 = [document.getElementById("1st-day"), document.getElementById("2nd-day"), document.getElementById("3rd-day")],
-    FIRSTDAY_HEADING = _ref12[0],
-    SECOND_DAY_HEADING = _ref12[1],
-    THIRD_DAY_HEADING = _ref12[2];
-  var _ref13 = ["".concat(arrayObjectOfNextThreeDaysObj[0][0], ", ").concat(arrayObjectOfNextThreeDaysObj[0][1]), "".concat(arrayObjectOfNextThreeDaysObj[1][0], ", ").concat(arrayObjectOfNextThreeDaysObj[1][1]), "".concat(arrayObjectOfNextThreeDaysObj[2][0], ", ").concat(arrayObjectOfNextThreeDaysObj[2][1])];
-  FIRSTDAY_HEADING.textContent = _ref13[0];
-  SECOND_DAY_HEADING.textContent = _ref13[1];
-  THIRD_DAY_HEADING.textContent = _ref13[2];
+  var _ref12 = ["".concat(result["location"]["name"], ", ").concat(result["location"]["country"]), "".concat(localTime)];
+  USER_LOCATION.textContent = _ref12[0];
+  LOCAL_TIME.textContent = _ref12[1];
+  var _ref13 = ["".concat(weatherData["currentWeather"]["precipitation"], "mm"), "".concat(weatherData["currentWeather"]["windspeedKMH"], "km/h"), weatherData["currentWeather"]["UV"]];
+  PERCEPITATION_TODAY.textContent = _ref13[0];
+  WIND_TODAY.textContent = _ref13[1];
+  UVINDEX_TODAY.textContent = _ref13[2];
+  var _ref14 = [document.getElementById("1st-day"), document.getElementById("2nd-day"), document.getElementById("3rd-day")],
+    FIRSTDAY_HEADING = _ref14[0],
+    SECOND_DAY_HEADING = _ref14[1],
+    THIRD_DAY_HEADING = _ref14[2];
+  var _ref15 = ["".concat(arrayObjectOfNextThreeDaysObj[0][0], ", ").concat(arrayObjectOfNextThreeDaysObj[0][1]), "".concat(arrayObjectOfNextThreeDaysObj[1][0], ", ").concat(arrayObjectOfNextThreeDaysObj[1][1]), "".concat(arrayObjectOfNextThreeDaysObj[2][0], ", ").concat(arrayObjectOfNextThreeDaysObj[2][1])];
+  FIRSTDAY_HEADING.textContent = _ref15[0];
+  SECOND_DAY_HEADING.textContent = _ref15[1];
+  THIRD_DAY_HEADING.textContent = _ref15[2];
   refreshWeatherCards(weatherData);
+  loadForecastIcons(result);
 }
 var BUTTON = document.getElementById("switch-degree-measurement-button");
 BUTTON.addEventListener("click", function (event) {
@@ -2317,65 +2341,65 @@ function refreshTemperature() {
   var tempeartureObject = getTodayTempObject(WEATHER_DATA);
   console.log("temperature😭:object");
   console.log(tempeartureObject);
-  var _ref14 = [document.getElementById("header-temp"), document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-wind"), document.getElementById("1st-hour-temp"), document.getElementById("2nd-hour-temp"), document.getElementById("3rd-hour-temp"), document.getElementById("4th-hour-temp"), document.getElementById("5th-hour-temp"), document.getElementById("1st-day-temp"), document.getElementById("1st-day-night-temp"), document.getElementById("1st-day-wind"), document.getElementById("2nd-day-temp"), document.getElementById("2nd-day-night-temp"), document.getElementById("2nd-day-wind"), document.getElementById("3rd-day-temp"), document.getElementById("3rd-day-night-temp"), document.getElementById("3rd-day-wind")],
-    HEADER_TEMP = _ref14[0],
-    TODAY_DAY_TEMP = _ref14[1],
-    TODAY_NIGHT_TEMP = _ref14[2],
-    TODAY_WIND = _ref14[3],
-    FIRST_HOUR_TEMP = _ref14[4],
-    SECOND_HOUR_TEMP = _ref14[5],
-    THIRD_HOUR_TEMP = _ref14[6],
-    FOURTH_HOUR_TEMP = _ref14[7],
-    FIFTH_HOUR_TEMP = _ref14[8],
-    FIRST_DAY_TEMP = _ref14[9],
-    FIRST_DAY_NIGHT_TEMP = _ref14[10],
-    FIRST_DAY_WIND = _ref14[11],
-    SECOND_DAY_TEMP = _ref14[12],
-    SECOND_DAY_NIGHT_TEMP = _ref14[13],
-    SECOND_DAY_WIND = _ref14[14],
-    THIRD_DAY_TEMP = _ref14[15],
-    THIRD_DAY_NIGHT_TEMP = _ref14[16],
-    THIRD_DAY_WIND = _ref14[17];
+  var _ref16 = [document.getElementById("header-temp"), document.getElementById("today-day-temp"), document.getElementById("today-night-temp"), document.getElementById("today-wind"), document.getElementById("1st-hour-temp"), document.getElementById("2nd-hour-temp"), document.getElementById("3rd-hour-temp"), document.getElementById("4th-hour-temp"), document.getElementById("5th-hour-temp"), document.getElementById("1st-day-temp"), document.getElementById("1st-day-night-temp"), document.getElementById("1st-day-wind"), document.getElementById("2nd-day-temp"), document.getElementById("2nd-day-night-temp"), document.getElementById("2nd-day-wind"), document.getElementById("3rd-day-temp"), document.getElementById("3rd-day-night-temp"), document.getElementById("3rd-day-wind")],
+    HEADER_TEMP = _ref16[0],
+    TODAY_DAY_TEMP = _ref16[1],
+    TODAY_NIGHT_TEMP = _ref16[2],
+    TODAY_WIND = _ref16[3],
+    FIRST_HOUR_TEMP = _ref16[4],
+    SECOND_HOUR_TEMP = _ref16[5],
+    THIRD_HOUR_TEMP = _ref16[6],
+    FOURTH_HOUR_TEMP = _ref16[7],
+    FIFTH_HOUR_TEMP = _ref16[8],
+    FIRST_DAY_TEMP = _ref16[9],
+    FIRST_DAY_NIGHT_TEMP = _ref16[10],
+    FIRST_DAY_WIND = _ref16[11],
+    SECOND_DAY_TEMP = _ref16[12],
+    SECOND_DAY_NIGHT_TEMP = _ref16[13],
+    SECOND_DAY_WIND = _ref16[14],
+    THIRD_DAY_TEMP = _ref16[15],
+    THIRD_DAY_NIGHT_TEMP = _ref16[16],
+    THIRD_DAY_WIND = _ref16[17];
   if (tempUnits === "celsius") {
-    var _ref15 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(tempeartureObject["celsius"][0], "\xB0C"), "".concat(tempeartureObject["celsius"][1], "\xB0C"), "".concat(tempeartureObject["celsius"][2], "\xB0C"), "".concat(tempeartureObject["celsius"][3], "\xB0C"), "".concat(tempeartureObject["celsius"][4], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedKPH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedKMH"], " km/h")];
-    HEADER_TEMP.textContent = _ref15[0];
-    TODAY_DAY_TEMP.textContent = _ref15[1];
-    TODAY_NIGHT_TEMP.textContent = _ref15[2];
-    TODAY_WIND.textContent = _ref15[3];
-    FIRST_HOUR_TEMP.textContent = _ref15[4];
-    SECOND_HOUR_TEMP.textContent = _ref15[5];
-    THIRD_HOUR_TEMP.textContent = _ref15[6];
-    FOURTH_HOUR_TEMP.textContent = _ref15[7];
-    FIFTH_HOUR_TEMP.textContent = _ref15[8];
-    FIRST_DAY_TEMP.textContent = _ref15[9];
-    FIRST_DAY_NIGHT_TEMP.textContent = _ref15[10];
-    FIRST_DAY_WIND.textContent = _ref15[11];
-    SECOND_DAY_TEMP.textContent = _ref15[12];
-    SECOND_DAY_NIGHT_TEMP.textContent = _ref15[13];
-    SECOND_DAY_WIND.textContent = _ref15[14];
-    THIRD_DAY_TEMP.textContent = _ref15[15];
-    THIRD_DAY_NIGHT_TEMP.textContent = _ref15[16];
-    THIRD_DAY_WIND.textContent = _ref15[17];
+    var _ref17 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(tempeartureObject["celsius"][0], "\xB0C"), "".concat(tempeartureObject["celsius"][1], "\xB0C"), "".concat(tempeartureObject["celsius"][2], "\xB0C"), "".concat(tempeartureObject["celsius"][3], "\xB0C"), "".concat(tempeartureObject["celsius"][4], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["temperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureC"], "\xB0C"), "".concat(WEATHER_DATA["currentWeather"]["windspeedKMH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedKPH"], " km/h"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_c"], "\xB0C"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedKMH"], " km/h")];
+    HEADER_TEMP.textContent = _ref17[0];
+    TODAY_DAY_TEMP.textContent = _ref17[1];
+    TODAY_NIGHT_TEMP.textContent = _ref17[2];
+    TODAY_WIND.textContent = _ref17[3];
+    FIRST_HOUR_TEMP.textContent = _ref17[4];
+    SECOND_HOUR_TEMP.textContent = _ref17[5];
+    THIRD_HOUR_TEMP.textContent = _ref17[6];
+    FOURTH_HOUR_TEMP.textContent = _ref17[7];
+    FIFTH_HOUR_TEMP.textContent = _ref17[8];
+    FIRST_DAY_TEMP.textContent = _ref17[9];
+    FIRST_DAY_NIGHT_TEMP.textContent = _ref17[10];
+    FIRST_DAY_WIND.textContent = _ref17[11];
+    SECOND_DAY_TEMP.textContent = _ref17[12];
+    SECOND_DAY_NIGHT_TEMP.textContent = _ref17[13];
+    SECOND_DAY_WIND.textContent = _ref17[14];
+    THIRD_DAY_TEMP.textContent = _ref17[15];
+    THIRD_DAY_NIGHT_TEMP.textContent = _ref17[16];
+    THIRD_DAY_WIND.textContent = _ref17[17];
   } else {
-    var _ref16 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(tempeartureObject["fahrenheit"][0], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][1], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][2], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][3], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][4], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedMPH"], " mph")];
-    HEADER_TEMP.textContent = _ref16[0];
-    TODAY_DAY_TEMP.textContent = _ref16[1];
-    TODAY_NIGHT_TEMP.textContent = _ref16[2];
-    TODAY_WIND.textContent = _ref16[3];
-    FIRST_HOUR_TEMP.textContent = _ref16[4];
-    SECOND_HOUR_TEMP.textContent = _ref16[5];
-    THIRD_HOUR_TEMP.textContent = _ref16[6];
-    FOURTH_HOUR_TEMP.textContent = _ref16[7];
-    FIFTH_HOUR_TEMP.textContent = _ref16[8];
-    FIRST_DAY_TEMP.textContent = _ref16[9];
-    FIRST_DAY_NIGHT_TEMP.textContent = _ref16[10];
-    FIRST_DAY_WIND.textContent = _ref16[11];
-    SECOND_DAY_TEMP.textContent = _ref16[12];
-    SECOND_DAY_NIGHT_TEMP.textContent = _ref16[13];
-    SECOND_DAY_WIND.textContent = _ref16[14];
-    THIRD_DAY_TEMP.textContent = _ref16[15];
-    THIRD_DAY_NIGHT_TEMP.textContent = _ref16[16];
-    THIRD_DAY_WIND.textContent = _ref16[17];
+    var _ref18 = ["".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(tempeartureObject["fahrenheit"][0], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][1], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][2], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][3], "\xB0F"), "".concat(tempeartureObject["fahrenheit"][4], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["temperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["nightTemperatureF"], "\xB0F"), "".concat(WEATHER_DATA["currentWeather"]["windspeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][1]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][1]["maximumWindSpeedMPH"], " mph"), "".concat(WEATHER_DATA["nextThreeDays"][2]["temp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["nighttemp_f"], "\xB0F"), "".concat(WEATHER_DATA["nextThreeDays"][2]["maximumWindSpeedMPH"], " mph")];
+    HEADER_TEMP.textContent = _ref18[0];
+    TODAY_DAY_TEMP.textContent = _ref18[1];
+    TODAY_NIGHT_TEMP.textContent = _ref18[2];
+    TODAY_WIND.textContent = _ref18[3];
+    FIRST_HOUR_TEMP.textContent = _ref18[4];
+    SECOND_HOUR_TEMP.textContent = _ref18[5];
+    THIRD_HOUR_TEMP.textContent = _ref18[6];
+    FOURTH_HOUR_TEMP.textContent = _ref18[7];
+    FIFTH_HOUR_TEMP.textContent = _ref18[8];
+    FIRST_DAY_TEMP.textContent = _ref18[9];
+    FIRST_DAY_NIGHT_TEMP.textContent = _ref18[10];
+    FIRST_DAY_WIND.textContent = _ref18[11];
+    SECOND_DAY_TEMP.textContent = _ref18[12];
+    SECOND_DAY_NIGHT_TEMP.textContent = _ref18[13];
+    SECOND_DAY_WIND.textContent = _ref18[14];
+    THIRD_DAY_TEMP.textContent = _ref18[15];
+    THIRD_DAY_NIGHT_TEMP.textContent = _ref18[16];
+    THIRD_DAY_WIND.textContent = _ref18[17];
   }
 }
 getCurrentWeather("Warsaw").then(function (result) {
